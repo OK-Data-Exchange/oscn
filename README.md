@@ -60,3 +60,8 @@ High Priority Cases - Any case that has appear on the docket in the past 7 days 
 Medium Priority Cases - Any open case (`closed_on` = `nil`). Scrapes the oldest first.
 
 Low Priority Cases - Closed cases that likely will not be updated as often.
+
+# DOC Import
+
+To run on Heroku, update the following script with the apropriate month/yearh
+`heroku run:detached --size performance-l -a oscn-pd rake "doc:scrape['2023-12']"`
