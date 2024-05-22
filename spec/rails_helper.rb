@@ -71,6 +71,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.before(:suite) do
     Rails.application.load_tasks
+    Rails.application.load_seed
   end
 end
 
