@@ -1,18 +1,4 @@
 GIT
-  remote: /Users/sabrinaleggett/Code/oscn_scraper
-  revision: 6386bafd64b0d0ba792abab61243a3af3b8ad7d9
-  specs:
-    oscn_scraper (0.1.1)
-      activesupport (>= 5.0.0)
-      bundler (>= 2.0)
-      byebug (>= 11.1.3)
-      httparty (>= 0.17)
-      nokogiri (>= 1.11)
-      rake (>= 10.0)
-      simplecov (>= 0.21.2)
-      yard (~> 0.9.26)
-
-GIT
   remote: https://github.com/AyOK-Code/ocso_scraper
   revision: 4023411139931557a0a44dda6549b2340e1dc3d2
   ref: 4023411
@@ -30,8 +16,8 @@ GIT
 
 GIT
   remote: https://github.com/AyOK-Code/oscn_scraper
-  revision: f2904ac16e675201e5a9fddec55cc9025f5c645b
-  ref: f2904ac
+  revision: 41586f2cebd75b215c371d3ff13e81ad108fb682
+  branch: sl-simplified-issue-format
   specs:
     oscn_scraper (0.1.1)
       activesupport (>= 5.0.0)
@@ -155,11 +141,12 @@ GEM
     byebug (11.1.3)
     choice (0.2.0)
     coderay (1.1.3)
-    concurrent-ruby (1.2.2)
+    concurrent-ruby (1.3.1)
     connection_pool (2.3.0)
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
@@ -199,10 +186,11 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    httparty (0.21.0)
+    httparty (0.22.0)
+      csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.1)
+    i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
@@ -248,15 +236,16 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0305)
     mini_magick (4.11.0)
-    mini_mime (1.1.2)
-    mini_portile2 (2.8.2)
-    minitest (5.18.1)
+    mini_mime (1.1.5)
+    mini_portile2 (2.8.7)
+    minitest (5.23.1)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.6.0)
-    multi_xml (0.6.0)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
     multipart-post (2.2.3)
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
@@ -271,7 +260,7 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.5.9)
-    nokogiri (1.15.2)
+    nokogiri (1.16.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     options (2.3.2)
@@ -304,7 +293,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
-    racc (1.7.1)
+    racc (1.8.0)
     rack (2.2.7)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -344,7 +333,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.2.1)
     raygun4ruby (3.2.6)
       concurrent-ruby
       httparty (> 0.13.7)

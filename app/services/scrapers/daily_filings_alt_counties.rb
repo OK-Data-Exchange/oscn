@@ -24,14 +24,17 @@ module Scrapers
       parsed_html = scrape_html
       data = parse_html(parsed_html)
 
+      Raygun.track_exception("Hit limit on cases for #{county_name} on #{date}") if data.count == 500
       data.each do |row|
         case_type_id = find_case_type(row)
         next if case_type_id.blank?
 
         court_case = create_court_case(row, case_type_id)
 
-        ::Importers::CaseHtml.perform(county.id, court_case.case_number)
-        ::Importers::CourtCase.perform(county.id, court_case.case_number)
+        court_case.update(enqueued: true)
+        CourtCaseWorker
+          .set(queue: :medium)
+          .perform_async(county.id, court_case.case_number, true)
       end
     end
 

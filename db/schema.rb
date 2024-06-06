@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_17_195254) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_19_192652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -449,7 +449,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_17_195254) do
     t.integer "number"
     t.string "name"
     t.bigint "court_case_id", null: false
-    t.bigint "count_code_id", null: false
+    t.bigint "count_code_id"
     t.date "filed_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
