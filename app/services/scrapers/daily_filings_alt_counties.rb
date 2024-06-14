@@ -6,18 +6,19 @@ module Scrapers
   # as it is limited to retrieving up to 500 per day currently.
 
   class DailyFilingsAltCounties
-    attr_accessor :date, :county, :case_number, :case_types
+    attr_accessor :date, :county, :case_number, :case_types, :enqueue
 
-    def initialize(county_name, date)
+    def initialize(county_name, date, enqueue: true)
       @date = date
       @county_name = county_name
       @case_number = case_number
       @case_types = CaseType.oscn_id_mapping
       @county = County.find_by(name: @county_name)
+      @enqueue = enqueue
     end
 
-    def self.perform(county, case_number)
-      new(county, case_number).perform
+    def self.perform(county_name, date, enqueue: true)
+      new(county, date).perform
     end
 
     def perform
@@ -30,6 +31,8 @@ module Scrapers
         next if case_type_id.blank?
 
         court_case = create_court_case(row, case_type_id)
+
+        next unless enqueue
 
         court_case.update(enqueued: true)
         CourtCaseWorker
