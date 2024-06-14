@@ -18,7 +18,7 @@ module Scrapers
     end
 
     def self.perform(county_name, date, enqueue: true)
-      new(county, date).perform
+      new(county_name, date, enqueue: enqueue).perform
     end
 
     def perform
