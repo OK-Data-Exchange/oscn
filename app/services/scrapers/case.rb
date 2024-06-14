@@ -14,7 +14,7 @@ module Scrapers
           Scrapers::NewCases.perform(county, days_ago: days_ago)
           Scrapers::HighPriority.perform(county, days_ago: days_ago, days_forward: days_forward)
         else
-          date_range = (DateTime.now::date - days_ago...DateTime.now::date)
+          date_range = (DateTime.now.to_date - days_ago...DateTime.now.to_date)
           date_range.each do |date|
             Scrapers::DailyFilingsAltCounties.perform(county, date, enqueue: false)
           end
