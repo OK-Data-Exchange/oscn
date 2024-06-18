@@ -23,6 +23,24 @@ RSpec.describe Importers::CourtCase do
       expect(court_case.docket_events.count).to eq 113
     end
 
+    xit 'saves data for a case with the kp vs ocis structure (present in smaller counties)' do
+      # Create a case with html from fixture
+      county = create(:county, name: 'Wagoner')
+      create(:judge, name: 'KIRKLEY, DOUGLAS')
+      court_case = create(:court_case, county_id: county.id, case_number: 'CF-2022-00029')
+      html = File.read('spec/fixtures/kp-example.html')
+      create(:case_html, court_case: court_case, html: html)
+
+      # Run importer
+      described_class.new(county.id, 'CF-2022-00029').perform
+      court_case = CourtCase.find(court_case.id) # Pull updated object
+      expect(court_case.parties.count).not_to be 0
+      expect(court_case.counts.count).not_to be 0
+      expect(court_case.events.count).not_to be 0
+      expect(court_case.counsels.count).not_to be 0
+      expect(court_case.docket_events.count).not_to be 0
+    end
+
     it 'saves party with text only for a case' do
       # Create a case with html from fixture
       county = create(:county, name: 'oklahoma')
