@@ -1,8 +1,8 @@
 require 'open-uri'
 
-namespace :save do
+namespace :scrape do
   desc 'Pull judges for a county'
   task judges: :environment do
-    Scrapers::Judges.perform
+    JudgesWorker.perform_async
   end
 end
