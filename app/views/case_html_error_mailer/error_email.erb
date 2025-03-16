@@ -1,0 +1,21 @@
+<h1>New errors with parsing expected HTML for <%= @case_number %> in <%= @county %></h1>
+<% if @errors.any?{|x| x[:differences]}%>
+<h3>Differences Key</h3>
+<p>
+  "-" = missing from expected<br/>
+  "+" = new from expected<br/>
+  "~" = different from expected<br/>
+</p>
+<% end %>
+<% @errors.each do |error| %>
+  <h2>Section: <%= error[:section] %></h2>
+  <p>
+    <%= error[:message] %><br/>
+    <% if error[:differences] %>
+      Differences:<br/>
+      <% error[:differences].each do |difference| %>
+        <%= difference %><br/>
+      <% end %>
+    <% end %>
+  </p>
+<% end %>

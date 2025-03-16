@@ -1,0 +1,17 @@
+[
+  {
+    "number": "1",
+    "issue_name": "INDEBTEDNESS",
+    "issue_code": "INDEBT",
+    "filed_by": "Cavalry SPV I, LLC",
+    "filed_on": "11/30/2023",
+    "parties": [
+      {
+        "name": "Paul, John O",
+        "disposition_on": "2024-07-17",
+        "verdict": "DEFAULT JUDGEMENT",
+        "verdict_detail": "Default Judgment"
+      }
+    ]
+  }
+]

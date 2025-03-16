@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en-US" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en-US" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-US" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        OSCN Case Details
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="/assets/css/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-2.3.2.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-Bx4pytHkyTDy3aJKjGkGoHPt3tvv6zlwwjc3iqN7ktaiEMLDPqLSZYts2OjKcBx1" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/assets/css/oscn-navigation.css">
+    <link rel="stylesheet" href="/assets/css/oscn-footer.css">
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .docket-first-column {
+            display: inline-block;
+            width: 125px;
+            text-align: center;
+        }
+        .docketlist th:nth-child(2){
+            display: none;
+        }
+        .docketlist td:nth-child(2){
+            display: none;
+        }
+        .docketlist,.docketlist tr {
+            position: relative;
+        }
+        .docketlist th:nth-child(3) {
+            position: absolute;
+            left: 10em;
+        }
+        span.partyname {
+            font-size: 0.75rem;
+        }
+        .docketlist td:nth-child(3) .description-wrapper{
+            margin-top: 1.75em;
+            position: relative;
+            margin-left: -3.5em;
+            padding-right: 1em;
+        }
+        /*------ kellpro remove space on additional text*/
+        .addtl-text .description-wrapper{
+            margin-top: 0!important;
+        }
+        .addtl-text .docket_code {
+            display: none;
+        }
+        .docketlist td:nth-child(1) {
+            font-weight: bold;
+        }
+        .docketlist th:nth-child(4),
+        .docketlist td:nth-child(4){
+            position: absolute;
+            right: 6em;
+        }
+        .docketlist th:nth-child(5),
+        .docketlist td:nth-child(5){
+            position: absolute;
+            right: 10em;
+        }
+        .docketlist th:nth-child(6),
+        .docketlist td:nth-child(6){
+            position: absolute;
+            right: 0;
+        }
+        .docketlist th:nth-child(2),
+        .docketlist td:nth-child(2){
+            display: table-cell;
+            position: absolute;
+            left: 6.1em;
+            font-weight: bold;
+        }
+
+        .docketRow td {
+            border-bottom: none!important;
+            border-top: none!important;
+        }
+        /*
+        .docketlist td:nth-child(1),
+        .docketlist td:nth-child(3){
+            border-bottom: gray solid 1px!important;
+        }
+        */
+        .primary-entry {
+            overflow: hidden;
+        }
+        .primary-entry td {
+            position: relative;
+        }
+        .primary-entry > td:before {
+            content: '';
+            border-top: 1px solid gray;
+            display: block;
+            position: absolute;
+            top: -1px;
+            width: 100%;
+        }
+        .kp.docketlist td:nth-child(1),
+        .kp.docketlist td:nth-child(3){
+        //border-bottom: #cecece solid 1px!important;
+        }
+
+
+
+        @media print {
+            .docketlist thead {
+                display: table-row;
+            }
+            .description-wrapper img { display: none; }
+            thead, thead tr {
+                position: relative!important;
+                width: 100%;
+            }
+        }
+        @media screen and (max-width:768px){
+            .docketlist td:nth-child(2){
+                display: none;
+                font-size: smaller;
+            }
+        }
+        .partyname:after {
+            content:'\f007';
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 900;
+            position: relative;
+            right: -0.25em;
+        }
+        .count_issue:before {
+            content:'\f292';
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 900;
+        }
+        .docket_code:before {
+            content:'[';
+            font-family: "Font Awesome 5 Pro";
+            position: relative;
+            left: -0.25em;
+        }
+        .docket_code:after {
+            content:']';
+            font-family: "Font Awesome 5 Pro";
+            position: relative;
+            right: -0.25em;
+        }
+        .warrant .docket_code:before {
+            content:'[ \f06e';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            font-weight: 900;
+        }
+        .return-warrant .docket_code:before {
+            content:'[ \f0e2';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            font-weight: 900;
+        }
+        .doc-tif:before {
+            content: '\f15b';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            color: black;
+        }
+        .doc-pdf:before {
+            content: '\f1c1';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            color: #FF0000;
+        }
+
+
+        /*COUNTS*/
+        @media screen and (max-width:1024px){
+
+            /*SHORTSTYLE*/
+            .caseStyle td ~ td{
+                width: 33%;
+            }
+            /*END SHORTSTYLE*/
+
+            .Disposition td, .Disposition th, .Counts td {
+                display: block;
+            }
+
+            .dispositionInformation, .paddedContainer, .partyName {
+                display: none!important;
+            }
+
+            .CountsContainer ~ .CountsContainer {
+                border-top: 3px solid silver;
+            }
+
+            .CountDescription {
+                padding-left: 1.75rem;
+            }
+
+            .Disposition th,
+            .Disposition td {
+                padding-left: 14px;
+            }
+
+            .countpartyname:before {
+                content: 'Party Name: ';
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            .countdisposition, .countdisposition {
+                margin-left: 1rem;
+            }
+
+            .Disposition tbody tr ~ tr {
+                display: block;
+                margin-top: 0.5rem;
+                border-top: 1px silver dashed
+            }
+        }
+
+
+        /*EVENTS*/
+        @media screen and (max-width:1024px){
+            .events_table td {
+                display: block;
+            }
+            td.event_partyname.empty, td.event_reporter.empty, td.event_judge.empty {
+                display: none;
+            }
+
+            td.event_partyname:before,
+            td.event_reporter:before,
+            td.event_judge:before {
+                font-weight: 600;
+            }
+            td.event_partyname:before { content: 'Party Name: '; }
+            td.event_reporter:before { content: 'Reporter: '; }
+            td.event_judge:before { content: 'Docket: '; }
+
+            span.nbsps { display: none; }
+
+            .events_table tr ~ tr {
+                border-top: 1px dashed silver;
+                padding: 0.25rem
+            }
+            .events_table tr{
+                padding-left: 0.5rem;
+                display: block;
+            }
+            td.event_partyname,
+            td.event_reporter,
+            td.event_judge
+            {
+                padding-left: 2rem;
+                font-size: 12px
+            }
+
+            .events_table thead {
+                display: none;
+            }
+        }
+    </style>
+    <!-- /STYLESHEET_INLINE/ -->
+    <script src="/assets/js/modernizr-2.6.2.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/assets/js/respond.min.js"></script>
+    <script>
+        window.onload = function() {
+            setTimeout(function(){
+                var height = $(".footer").outerHeight(true);
+                $("#oscn-content").css("padding-bottom", function(){
+                    return height;
+                });}, 2000);
+        }
+    </script>
+    <![endif]-->
+    <script src="/assets/js/cookies.js"></script>
+    <!-- /JAVASCRIPT_TOP/ -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-54280338-1', {'sampleRate': 50});
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <!-- /ERRORMESSAGE/ -->
+    <div class="header" data-elastic-exclude>
+        <div class="accessibility">
+            <a href="#oscn-content">Skip to Main Content</a>
+            <a href="/v4/accessibility/">Accessibility Statement</a>
+        </div>
+        <div class="navigation-tophat">
+            <div class="sized">
+                <div class="left">
+                    <ul>
+                        <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=">Help</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li><a href="https://efile.oscn.net">e-filing</a></li>
+                        <li><a href="https://pay.oscn.net/epayments/">e-payments</a></li>
+                        <li><a href="/jobs/">Careers</a></li>
+                        <!-- <li class="site-search no-border">
+                            <form class="search-form" method="get" action="/search/search.aspx">
+                                <div class="search-container">
+                                <select class="template-dropdown" style="display: none;">
+                                    <option class="template-option"></option>
+                                </select>
+                                <select class="search-dropdown" name="t">
+                                    <optgroup label="Legal Research">
+                                        <option value="citation">By Citation (QuickCite)</option>
+                                        <option value="judge">By Judge</option>
+                                        <option value="caselaw">Case Law (full-text)</option>
+                                        <option value="statutes">Statutes &amp; Rules (full-text)</option>
+                                        <option value="library">All Oklahoma Materials (full-text)</option>
+                                    </optgroup>
+                                    <optgroup label="Court Records">
+                                        <option selected="selected" value="party">By Party Name</option>
+                                        <option value="business">By Business Name</option>
+                                        <option value="casenumber">By Case Number</option>
+                                        <option value="traffic">By Traffic Citation</option>
+                                    </optgroup>
+                                </select></div><!--
+                                <input class="search-input" type="text" value="Search" name="q"></input><!--
+                                <button class="search-button" type="submit" value="Go!"></button>
+                            </form>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-spectacles sized">
+            <div class="navigation-utility">
+                <div class="brand"><a href="/"><img id="logo" class="screen-logo" alt="OSCN" src="/assets/img/logo.jpg" /><img class="print-logo" alt="" src="/assets/img/logo-bw.jpg" /></a></div>
+                <div class="toggle" style="display: none;"><button type="button" data-toggle="navigation"><span class="sr-only">toggle navigation</span></button></div>
+            </div>
+            <nav>
+                <ol class="nav-menu">
+                    <li class="nav-item" id="home"><a href="/v4/">Home</a></li>
+                    <li class="nav-item" id="courts_menu"><a href="/courts/">Courts</a></li>
+                    <li class="nav-item" id="decisions"><a href="/decisions/">Decisions</a></li>
+                    <li class="nav-item" id="programs"><a href="/v4/programs/">Programs</a></li>
+                    <li class="nav-item" id="news"><a href="/news/">News</a></li>
+                    <li class="nav-item" id="legal-research"><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=LIBRARY">Legal Research</a></li>
+                    <li class="nav-item" id="court-records"><a href="/dockets/">Court Records</a></li>
+                    <li class="nav-item" id="quick-links"><a href="/v4/quicklinks/">Quick Links</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div id="oscn-content"><div class="sized">
+        <style>
+            td, th { padding: 2px 5px; }
+            h2.styletop {
+                text-align: left;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            span.styletop {
+                display: block;
+                text-align: center;
+                line-height: 1.5rem;
+                padding: 0.5rem 0;
+            }
+
+            .section {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: left;
+            }
+
+            .partyCounts thead th { text-decoration: underline; }
+            .paddedContainer { width: 75px; }
+            .partyName, .dispositionInformation, .CountDescription { padding: 2px 5px; }
+            .CountNumber { width: 75px; }
+            .CountNumber, .partyName, .dispositionInformation, .CountDescription { vertical-align: top; }
+
+            p { margin: 0; padding: 0; }
+            table th { text-align: left; }
+            table { margin-bottom: 10px; width: 100%; border-collapse: collapse; }
+
+            .caseStyle {  }
+            .caseStyle td { border: 1px solid #e1e1e1; padding: 5px 10px; }
+
+            .docketRow td { padding: 3px 2px 3px 2px; border-top: thin solid #e1e1e1; border-bottom: thin solid #e1e1e1;}
+
+            .evenRow { background-color: #f7f7f7;}
+            .oddRow { background-color: white; }
+
+            .multipleRecords {
+                width: 100%;
+                position: relative;
+                margin-top: 2em;
+                margin-bottom: 2em;
+            }
+            .multipleRecords caption {
+                text-align: left;
+                font-weight: bold;
+                position: relative;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                position: relative;
+            }
+            .foundRecords {
+                position: absolute;
+                right: 5px; font-size: 14px;
+            }
+            .multipleRecords thead th {
+                font-size: 13px;
+                text-align: left;
+                padding: 4px 3px;
+                vertical-align: top;
+                background-color: #f7f7f7;
+            }
+            .tablerow { border-top: thin solid #e1e1e1; }
+            .tablerow td { font-size: 11px; padding: 4px 3px; color: #033c60; vertical-align: top;}
+
+
+            #rev, .revLabel { display: inline; margin: 0; }
+
+            .heading3 {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: center;
+                margin-top: 2em;
+            }
+
+            table { margin: 0 auto 0 auto; }
+            .casetype { width: 50%; }
+            .casetype caption {
+                text-align: center;
+                color: #033c60;
+                margin: 0;
+                padding: 10px 5px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            .casetype th {
+                font-size: 13px;
+                text-align: left;
+                padding: 4px 3px;
+                vertical-align: top;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+            }
+            .casetype tr {
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+            }
+            .casetype td { padding: 3px 4px; }
+            .casenoformat { width: 350px; }
+            .casenoformat tbody tr td { text-align: center; }
+            table caption { }
+            .casetype { min-width: 250px; }
+            form label { font: bold 11pt arial; }
+            .padding { height: 2em; }
+        </style>
+        <style>
+            td, th {
+                padding: 2px 5px;
+            }
+            h2.styletop {
+                text-align: left;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            span.styletop { display: block; text-align: center; }
+
+            .section {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: left;
+            }
+
+            .partyCounts thead th {
+                text-decoration: underline;
+            }
+            .paddedContainer {
+                width: 75px;
+            }
+            .partyName, .dispositionInformation, .CountDescription {
+                padding: 2px 5px;
+            }
+            .CountNumber {
+                width: 75px;
+            }
+
+            .CountNumber, .partyName, .dispositionInformation, .CountDescription {
+                vertical-align: top;
+            }
+
+            p { margin: 0; padding: 0; }
+            table th { text-align: left; }
+            table { margin-bottom: 10px; width: 100%; border-collapse: collapse; }
+
+            .caseStyle {  }
+            .caseStyle td { border: 1px solid #e1e1e1; padding: 5px 10px; }
+
+            .docketRow td { padding: 3px 2px 3px 2px; border-top: thin solid #e1e1e1; border-bottom: thin solid #e1e1e1;}
+
+            .evenRow { background-color: #f7f7f7;}
+            .oddRow { background-color: white; }
+        </style>
+        <p class="notice">The information on this page is NOT an official
+            record. Do not rely on the correctness or completeness of this
+            information. Verify all information with the <a href="
+    /courts/oklahoma">official record
+                keeper</a>. The information contained in this report is provided in
+            compliance with the Oklahoma Open Records Act,
+            <a href="http://www.oscn.net/applications/oscn/deliverdocument.asp?citeid=80288">51 O.S. 24A.1</a>.
+            Use of this information is governed by this act, as well as other
+            applicable state and federal laws.
+        </p>
+        <h2 class="styletop"><span class="styletop">In the District Court in and for <a style="color: white; text-decoration: underline;" href="
+    /courts/oklahoma">oklahoma&nbsp;County</a>, Oklahoma</span></h2>
+        <table class="caseStyle" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td valign="center" width="50%">Cavalry SPV I, LLC, AS ASSIGNEE OF<br />
+                    CITIBANK, N.A CITIBANK, N.A.<br />
+                    <br />
+                              Plaintiff,<br />
+                    v.<br />
+                    John O Paul,<br />
+                              Defendant.</td>
+                <td width="50%"><strong>
+                    No. CS-2023-9684<br>
+                    (Civil relief less than $10,000: INDEBTEDNESS)
+                </strong><br><br>
+                    Filed: 11/30/2023<br>Closed: 07/17/2024<br><br>Judge: Collins, April<br></td>
+            </tr>
+        </table><script id="json_style" type="application/json">
+        {
+            "style": "Cavalry SPV I, LLC v. John O Paul",
+            "cmid": "4258368",
+            "cms": "ocis",
+            "court": "OKLAHOMA"
+        }
+    </script><h2 class="section party">Parties</h2>
+        <p><span class="parties_party"><span class="parties_partyname">Cavalry SPV I, LLC</span>,
+
+<span class="parties_type">Plaintiff</span></span><br><span class="parties_party"><span class="parties_partyname">Paul,&nbsp; John&nbsp; O</span>,
+
+<span class="parties_type">Defendant</span></span><br> &nbsp;
+        </p>
+        <h2 class="section attorneys">Attorneys</h2>
+        <table width="100%">
+            <thead>
+            <tr>
+                <th align="left">Attorney</th>
+                <th align="left">Represented Parties</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td valign="top" width="50%">Young,&nbsp; Dan&nbsp;(Bar #20915)<br>JENKINS WAGNON & YOUNG P.C.<br>P O BOX 420<br>LUBBOCK, TX&nbsp;79408<br>&nbsp;
+                </td>
+                <td valign="top" width="50%">Cavalry SPV I, LLC, <br></td>
+            </tr>
+            </tbody>
+        </table>
+        <h2 class="section events">Events</h2>
+        <p><span class="nbsps">&nbsp;&nbsp;</span>None<br></p>
+        <h2 class="section issues">Issues</h2>
+        <p>
+            <font size="1">For cases filed before 1/1/2000, ancillary issues may not appear except in the docket.</font><br>&nbsp;</p>
+        <table>
+            <tr>
+                <td valign="top" width="100px"><strong>Issue # 1.</strong></td>
+                <td>
+                    Issue: INDEBTEDNESS
+                    (INDEBT)
+                    <br>Filed By: Cavalry SPV I, LLC<br>Filed Date: 11/30/2023<br></td>
+            </tr>
+        </table>
+        <table class="Disposition">
+            <thead>
+            <tr>
+                <th class="paddedContainer"></th>
+                <th class="partyName">Party Name</th>
+                <th class="dispositionInformation">Disposition Information</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td width="100px"></td>
+                <td class="countpartyname" width="20%" valign="top"><strong><u>Defendant:</u></strong>&nbsp;
+                    <nobr>Paul, John O</nobr></td>
+                <td class="countdisposition" valign="top">
+                    <font color="red"><strong>
+                        Disposed:  DEFAULT JUDGEMENT,
+                        07/17/2024.
+                        Default Judgment</strong></font>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h2 class="section dockets">Docket</h2>
+        <table class="docketlist ocis" cellpadding="2" cellspacing="2" border="0">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Count</th>
+                <th>Party</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="black"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="black"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="black">CIVIL RELIEF LESS THAN $10,000 INITIAL FILING.</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"><span class="count_issue">1&nbsp;&nbsp;</span></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>INDEBT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">INDEBTEDNESS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>DMFE</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">DISPUTE MEDIATION FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 7.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>PFE1</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">PETITION</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 150.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>PFE7</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">LAW LIBRARY FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 6.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>OCISR</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">OKLAHOMA COURT INFORMATION SYSTEM REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 25.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>OCJC</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">OKLAHOMA COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.55</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>OCASA</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 5.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>SSFCHSCPC</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">SHERIFF'S SERVICE FEE FOR COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>CCADMINCSF</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">COURT CLERK ADMINISTRATIVE FEE ON COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>CCADMIN0155</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">COURT CLERK ADMINISTRATIVE FEE ON $1.55 COLLECTION</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.16</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>SJFIS</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">STATE JUDICIAL REVOLVING FUND - INTERPRETER AND TRANSLATOR SERVICES</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.45</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>DCADMIN155</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">DISTRICT COURT ADMINISTRATIVE FEE ON $1.55 COLLECTIONS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.23</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>DCADMIN05</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">DISTRICT COURT ADMINISTRATIVE FEE ON $5 COLLECTIONS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.75</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="green"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="green"><nobr>DCADMINCSF</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="green">DISTRICT COURT ADMINISTRATIVE FEE ON COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>CCRMPF</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>CCADMIN04</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">COURT CLERK ADMINISTRATIVE FEE ON COLLECTIONS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>LTF</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">LENGTHY TRIAL FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="GREEN"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="GREEN"><nobr>SMF</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="GREEN">SUMMONS FEE (CLERKS FEE)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="black"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="black"><nobr>P</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="black">PETITION ON AN ACCOUNT AND MONEY LENT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="BLACK"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="BLACK"><nobr>ANMS</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="BLACK">AFFIDAVIT AS TO  MILITARY SERVICE</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1057239064)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1057239064&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1057239064&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="black"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="black"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="black">OCIS HAS AUTOMATICALLY ASSIGNED JUDGE COLLINS, APRIL TO THIS CASE.</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>11-30-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>ACCOUNT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">RECEIPT # 2023-5526141 ON 11/30/2023. <BR />
+                                PAYOR: ABC LEGAL SERVICES LLC TOTAL AMOUNT PAID: $ 239.14.<BR />
+                                LINE ITEMS:<BR />
+                                CS-2023-9684: $160.00 ON AC01 CLERK FEES.<BR />
+                                CS-2023-9684: $6.00 ON AC23 LAW LIBRARY FEE CIVIL AND CRIMINAL.<BR />
+                                CS-2023-9684: $1.66 ON AC31 COURT CLERK REVOLVING FUND.<BR />
+                                CS-2023-9684: $5.00 ON AC58 OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES.<BR />
+                                CS-2023-9684: $1.55 ON AC59 COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND.<BR />
+                                CS-2023-9684: $7.00 ON AC64 DISPUTE MEDIATION FEES CIVIL ONLY.<BR />
+                                CS-2023-9684: $0.45 ON AC65 STATE JUDICIAL REVOLVING FUND, INTERPRETER SVCS.<BR />
+                                CS-2023-9684: $2.48 ON AC67 DISTRICT COURT REVOLVING FUND.<BR />
+                                CS-2023-9684: $25.00 ON AC79 OCIS REVOLVING FUND.<BR />
+                                CS-2023-9684: $10.00 ON AC81 LENGTHY TRIAL FUND.<BR />
+                                CS-2023-9684: $10.00 ON AC88 SHERIFF’S SERVICE FEE FOR COURT HOUSE SECURITY.<BR />
+                                CS-2023-9684: $10.00 ON AC89 COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE.<BR /></font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="black"><nobr>12-11-2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="black"><nobr>SMS</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="black">SUMMONS RETURNED, SERVED:    JOHN O. PAUL BY PERS. SERV. ON 12/6/23<BR /></font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1056953663)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1056953663&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1056953663&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="black"><nobr>01-29-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="black"><nobr>MODJ</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="black">PLAINTIFF'S MOTION FOR DEFAULT JUDGMENT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1057706599)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1057706599&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1057706599&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="magenta"><nobr>04-15-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="magenta"><nobr>CNOTE</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="magenta">JUDGMENT PRESENT TO COURT/COURT RETURNED FOR CORRECTIONS (NEED WET SIGNATURE NOT PHOTO COPIED)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="BLACK"><nobr>04-15-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="BLACK"><nobr>ANMS</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="BLACK">DECLARATION AS TO MILITARY SERVICE</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1058533584)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1058533584&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1058533584&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="BLACK"><nobr>06-28-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="BLACK"><nobr>ANMS</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="BLACK">DECLARATION AS TO MILITARY SERVICE<BR /></font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1059085980)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1059085980&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1059085980&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="8B0000C"><nobr>07-17-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="8B0000C"><nobr>DISPCVDJ</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="8B0000C">JUDGE COLLINS/ JOURNAL ENTRY OF DEFAULT JUDGEMENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"><span class="count_issue">1&nbsp;&nbsp;</span></td>
+                <td valign="top"><span class="partyname">Paul, John O</span></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="1"><nobr>07-23-2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="1"><nobr>JUDG</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="1">JUDGMENT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1059382584)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2023-9684&bc=1059382584&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1059382584&cn=CS-2023-9684&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div></div>
+    <div class="footer" data-elastic-exclude>
+        <div class="container-fluid sized">
+            <div class="row-fluid">
+                <div class="contact-foot column span3">
+                    <h6>oscn</h6>
+                    <p>
+                        EMAIL: <a href="mailto:webmaster@oscn.net">webmaster@oscn.net</a><br />
+                        Oklahoma Judicial Center<br />
+                        2100 N Lincoln Blvd.<br />
+                        Oklahoma City, OK 73105</p>
+                </div>
+                <div class="courts-foot column span3">
+                    <h6>courts</h6>
+                    <ul class="footer-list">
+                        <li><a href="http://www.oscn.net/oscn/schome/">Supreme Court of Oklahoma</a></li>
+                        <li><a href="http://www.okcca.net/">Court of Criminal Appeals</a></li>
+                        <li>Court of Civil Appeals</li>
+                        <li><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=COURTS">District Courts</a></li>
+                    </ul>
+                </div>
+                <div class="decisions-foot column span3">
+                    <h6>decisions</h6>
+                    <ul class="footer-list">
+                        <li><a href="/decisions/">New Decisions</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSSC">Supreme Court of Oklahoma</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCR">Court of Criminal Appeals</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCV">Court of Civil Appeals</a></li>
+                    </ul>
+                </div>
+                <div class="programs-foot column span3">
+                    <h6>programs</h6>
+                    <ul class="footer-list">
+                        <li><a href="http://www.thesovereigntysymposium.com/">The Sovereignty Symposium</a></li>
+                        <!--<li><a href="#">Access to Justice</a></li>-->
+                        <li><a href="http://www.oscn.net/static/adr/default.aspx">Alternative Dispute Resolution</a></li>
+                        <li><a href="http://www.oscn.net/static/adr/default.aspx">Early Settlement Mediation</a></li>
+                        <li><a href="http://www.oscn.net/Sites/CourtImprovement/default.aspx">Children's Court Improvement Program (CIP)</a></li>
+                        <li><a href="/jnc/">Judicial Nominating Commission</a></li>
+                        <li><a href="http://www.oscn.net/static/forms/aoc_forms/interpreter.asp">Certified Courtroom Interpreters</a></li>
+                        <li><a href="http://www.oscn.net/static/forms/aoc_forms/csr.asp">Certified Shorthand Reporters</a></li>
+                        <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shoes">
+            <div class="sized">
+                <ul>
+                    <!--<li><a href="#">site map</a></li>
+                    <li><a href="#">information</a></li>
+                    -->
+                    <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+                    <li><a href="/jobs/">Careers</a></li>
+                    <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery-1.11.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/adobe.aria.menu.min.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/oscn.js"></script>
+<script src="/assets/js/table.sort.filter.js"></script>
+<script>
+  if (window.NodeList && !NodeList.prototype.forEach) { NodeList.prototype.forEach = Array.prototype.forEach; }
+
+  var d = new Date()
+  var cb = d.getFullYear().toString() + (d.getMonth()+1).toString() + ("0" + d.getDate()).slice(-2) + d.getHours()
+
+  var anchors = document.querySelectorAll("a[href$='.pdf']")
+  anchors.forEach(function(a){
+    a.href = a.href.split('?')[0] + "?d=" + cb;
+  });
+
+</script>
+<script src="/dockets/scripts/dockets.js"></script>
+<!--[if IE 7]>
+<script>
+    var height = $(".home-banner").height();
+    $("#bg").height(height);
+</script>
+<![endif]-->
+</body>
+</html>

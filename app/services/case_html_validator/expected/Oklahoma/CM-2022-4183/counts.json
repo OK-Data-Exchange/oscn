@@ -1,0 +1,36 @@
+[
+  {
+    "number": "1",
+    "party_name": "ODOM, JOSHUA LESLIE",
+    "offense_on": "2022-09-06",
+    "as_filed": "DRIVING UNDER THE INFLUENCE OF ALCOHOL",
+    "filed_statute_code": "DI1M",
+    "filed_statute_violation": "47 O.S. 11-902(A)(2)",
+    "filed_statute_violation_link": "http://www.oscn.net/applications/oscn/deliverdocument.asp?box1=47\u0026box2=OS\u0026box3=11-902(A)(2)",
+    "disposition": "CONVICTION, 06/26/2024. Guilty Plea",
+    "charge": "DRIVING UNDER THE INFLUENCE OF ALCOHOL(DI1M)",
+    "disposition_on": "2024-06-26",
+    "disposed_statute_code": "DI1M",
+    "disposed_statute_violation": "47 O.S. 11-902(A)(2)",
+    "disposed_statute_violation_link": "http://www.oscn.net/applications/oscn/deliverdocument.asp?box1=47 \u0026box2=OS\u0026box3=11-902(A)(2)",
+    "plea": "Guilty Plea",
+    "verdict": "CONVICTION"
+  },
+  {
+    "number": "2",
+    "party_name": "ODOM, JOSHUA LESLIE",
+    "offense_on": "2022-09-06",
+    "as_filed": "CARRYING A FIREARM WHILE UNDER THE INFLUENCE OF DRUGS OR ALCOHOL",
+    "filed_statute_code": "WE1",
+    "filed_statute_violation": "21 O.S. 1289.9",
+    "filed_statute_violation_link": "http://www.oscn.net/applications/oscn/deliverdocument.asp?box1=21\u0026box2=OS\u0026box3=1289.9",
+    "disposition": "CONVICTION, 06/26/2024. Guilty Plea",
+    "charge": "CARRYING A FIREARM WHILE UNDER THE INFLUENCE OF DRUGS OR ALCOHOL(WE1)",
+    "disposition_on": "2024-06-26",
+    "disposed_statute_code": "WE1",
+    "disposed_statute_violation": "21 O.S. 1289.9",
+    "disposed_statute_violation_link": "http://www.oscn.net/applications/oscn/deliverdocument.asp?box1=21 \u0026box2=OS\u0026box3=1289.9",
+    "plea": "Guilty Plea",
+    "verdict": "CONVICTION"
+  }
+]
