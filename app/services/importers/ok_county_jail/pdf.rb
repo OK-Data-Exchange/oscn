@@ -20,7 +20,9 @@ module Importers
         puts all_pages
       end
 
-      def upsert(data); end
+      def upsert(data)
+
+      end
 
       def booking_data(lines)
         fields = field_map_from_sample.except(:offense_table)
@@ -53,39 +55,48 @@ module Importers
         loop do
           row_data = {}
           line = fields.values[0][:line] - offense_table_row_shift(lines, fields) + row_count
+          break if is_footer?(lines[line])
+
           fields.each do |field, position|
             position[:line] = line
-            begin
-              row_data[field], character_shift = get_value(lines, position, character_shift)
-            rescue StandardError
-              # todo: fix error when offense description takes multiple lines
-              binding.pry
-            end
+            row_data[field], character_shift = get_value(lines, position, character_shift)
           end
-          break if row_data.compact.empty?
-
           data << row_data
           row_count += 1
         end
         data
       end
 
+      def is_footer?(line)
+        line.include? "Jail Blotter OKC"
+      end
+
       def page_to_dict(page)
-        lines = page.text.split(/\n/)
+        lines = page.text.split(/\n/).compact_blank
         booking_data(lines)
       end
 
       def get_value(lines, position, shift)
-        line = lines[position[:line]]
-        return [nil, shift] unless line.present?
+        begin
+          line = lines[position[:line]]
+          return [nil, shift] unless line.present?
 
-        value = field_value(line, position[:start], position[:end], shift)
-        while has_gap(value)
-          puts "Empty space detected. Trying shift for: #{value}"
-          shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
           value = field_value(line, position[:start], position[:end], shift)
+          while has_gap(value)
+            puts "Empty space detected. Trying shift for: #{value}"
+            shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
+            value = field_value(line, position[:start], position[:end], shift)
+          end
+          [value, shift]
+        rescue
+          puts "error parsing line at:"
+          puts position
+          puts "line before: "
+          puts lines[position[:line] - 1]
+          puts "line after: "
+          puts lines[position[:line] + 1]
+          [nil, shift]
         end
-        [value, shift]
       end
 
       def gap_position(value)
@@ -108,10 +119,11 @@ module Importers
         link = 'https://www.okcountydc.net/_files/ugd/413d25_a5e2f3d02e394e909a16bc4cd3c84a5a.pdf'
         io = URI.parse(link).open
         reader = PDF::Reader.new(io)
-        sample_text = reader.pages[1].text.split(/\n/)
+        sample_text = reader.pages[1].text.split(/\n/).compact_blank
         # Avoid PII in here. Partial data should suffice.
         @field_map = {
-          offender_name: locate_in_sample(sample_text, 'AHBO', '- 9/20/19'),
+          booking_number: locate_in_sample(sample_text, '140088715', nil),
+          full_name: locate_in_sample(sample_text, 'AHBO', '- 9/20/19'),
           dob: locate_in_sample(sample_text, '9/20/19', '03/01'),
           booked_at: locate_in_sample(sample_text, '03/01', nil),
           height: locate_in_sample(sample_text, 'Hgt', 'Wgt'),

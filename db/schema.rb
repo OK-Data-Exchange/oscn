@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_17_195254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -698,6 +698,32 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
     t.text "status"
     t.index ["account_id", "value_type"], name: "index_ok_assessor_value_details_on_account_id_and_value_type", unique: true
     t.index ["account_id"], name: "index_ok_assessor_value_details_on_account_id"
+  end
+
+  create_table "ok_county_jail_bookings", force: :cascade do |t|
+    t.string "booking_number"
+    t.string "full_name"
+    t.date "dob"
+    t.datetime "booked_at"
+    t.integer "height_in"
+    t.integer "weight"
+    t.string "eyes"
+    t.string "hair_color"
+    t.string "hair_length"
+    t.string "skin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ok_county_jail_offenses", force: :cascade do |t|
+    t.bigint "ok_county_jail_bookings_id", null: false
+    t.string "code"
+    t.string "description"
+    t.string "case_number"
+    t.string "bond"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ok_county_jail_bookings_id"], name: "index_ok_county_jail_offenses_on_ok_county_jail_bookings_id"
   end
 
   create_table "ok_election_precincts", force: :cascade do |t|
@@ -1444,6 +1470,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
   add_foreign_key "ok_assessor_sales", "ok_assessor_accounts", column: "account_id"
   add_foreign_key "ok_assessor_section_township_ranges", "ok_assessor_accounts", column: "account_id"
   add_foreign_key "ok_assessor_value_details", "ok_assessor_accounts", column: "account_id"
+  add_foreign_key "ok_county_jail_offenses", "ok_county_jail_bookings", column: "ok_county_jail_bookings_id"
   add_foreign_key "ok_election_precincts", "counties"
   add_foreign_key "ok_election_voters", "ok_election_precincts", column: "precinct_id"
   add_foreign_key "ok_election_votes", "ok_election_voters", column: "voter_id"
@@ -1531,8 +1558,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
   add_index "party_stats", ["party_id"], name: "index_party_stats_on_party_id"
 
   create_view "case_stats", materialized: true, sql_definition: <<-SQL
-      SELECT id AS court_case_id,
-      (closed_on - filed_on) AS length_of_case_in_days,
+      SELECT court_cases.id AS court_case_id,
+      (court_cases.closed_on - court_cases.filed_on) AS length_of_case_in_days,
       ( SELECT count(*) AS count
              FROM counts
             WHERE (court_cases.id = counts.court_case_id)) AS counts_count,
@@ -2156,25 +2183,25 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
              FROM clean_ocso
             WHERE (clean_ocso.ocso_resolved_at IS NULL)
           )
-   SELECT ocso_id,
-      ocso_first_name,
-      ocso_last_name,
-      ocso_middle_name,
-      ocso_birth_date,
-      ocso_bond_amount,
-      ocso_issued,
-      ocso_counts,
-      ocso_resolved_at,
-      ocso_case_number,
-      case_type,
-      full_year,
-      last_case_number,
-      clean_case_number,
-      link,
-      defendant_count,
+   SELECT added_defendant_counts.ocso_id,
+      added_defendant_counts.ocso_first_name,
+      added_defendant_counts.ocso_last_name,
+      added_defendant_counts.ocso_middle_name,
+      added_defendant_counts.ocso_birth_date,
+      added_defendant_counts.ocso_bond_amount,
+      added_defendant_counts.ocso_issued,
+      added_defendant_counts.ocso_counts,
+      added_defendant_counts.ocso_resolved_at,
+      added_defendant_counts.ocso_case_number,
+      added_defendant_counts.case_type,
+      added_defendant_counts.full_year,
+      added_defendant_counts.last_case_number,
+      added_defendant_counts.clean_case_number,
+      added_defendant_counts.link,
+      added_defendant_counts.defendant_count,
           CASE
-              WHEN (defendant_count = 0) THEN NULL::bigint
-              WHEN (defendant_count = 1) THEN ( SELECT count(*) AS count
+              WHEN (added_defendant_counts.defendant_count = 0) THEN NULL::bigint
+              WHEN (added_defendant_counts.defendant_count = 1) THEN ( SELECT count(*) AS count
                  FROM (((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2184,7 +2211,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
                            JOIN parties ON ((case_parties.party_id = parties.id)))
                            JOIN party_types ON ((parties.party_type_id = party_types.id)))
                         WHERE (((party_types.name)::text = 'defendant'::text) AND (case_parties.court_case_id = court_cases.id))) = 1)))
-              WHEN (defendant_count > 1) THEN ( SELECT count(*) AS count
+              WHEN (added_defendant_counts.defendant_count > 1) THEN ( SELECT count(*) AS count
                  FROM ((((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2194,8 +2221,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
               ELSE NULL::bigint
           END AS warrant_count,
           CASE
-              WHEN (defendant_count = 0) THEN NULL::bigint
-              WHEN (defendant_count = 1) THEN ( SELECT count(*) AS count
+              WHEN (added_defendant_counts.defendant_count = 0) THEN NULL::bigint
+              WHEN (added_defendant_counts.defendant_count = 1) THEN ( SELECT count(*) AS count
                  FROM (((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2205,7 +2232,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
                            JOIN parties ON ((case_parties.party_id = parties.id)))
                            JOIN party_types ON ((parties.party_type_id = party_types.id)))
                         WHERE (((party_types.name)::text = 'defendant'::text) AND (case_parties.court_case_id = court_cases.id))) = 1)))
-              WHEN (defendant_count > 1) THEN ( SELECT count(*) AS count
+              WHEN (added_defendant_counts.defendant_count > 1) THEN ( SELECT count(*) AS count
                  FROM ((((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2215,8 +2242,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
               ELSE NULL::bigint
           END AS return_warrant_count,
           CASE
-              WHEN (defendant_count = 0) THEN NULL::character varying
-              WHEN (defendant_count = 1) THEN ( SELECT docket_event_types.code
+              WHEN (added_defendant_counts.defendant_count = 0) THEN NULL::character varying
+              WHEN (added_defendant_counts.defendant_count = 1) THEN ( SELECT docket_event_types.code
                  FROM (((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2228,7 +2255,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
                         WHERE (((party_types.name)::text = 'defendant'::text) AND (case_parties.court_case_id = court_cases.id))) = 1))
                 ORDER BY docket_events.event_on DESC
                LIMIT 1)
-              WHEN (defendant_count > 1) THEN ( SELECT docket_event_types.code
+              WHEN (added_defendant_counts.defendant_count > 1) THEN ( SELECT docket_event_types.code
                  FROM ((((docket_events
                    JOIN court_cases ON ((docket_events.court_case_id = court_cases.id)))
                    JOIN counties ON ((court_cases.county_id = counties.id)))
@@ -2425,49 +2452,49 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_29_224136) do
                JOIN count_codes ON ((issues.count_code_id = count_codes.id)))
             WHERE (((count_codes.code)::text = ANY (ARRAY['SCFED1'::text, 'SCFED2'::text, 'FED1'::text, 'FED2'::text, 'ENTRY'::text])) AND ((counties.name)::text = 'Oklahoma'::text) AND (court_cases.is_error IS FALSE))
           )
-   SELECT court_case_id,
-      case_filed_on,
-      case_closed_on,
-      case_number,
-      max_judgement_date,
-      days_to_judgement,
-      defendant_name,
-      distinct_verdicts_count,
-      verdict,
-      verdict_details,
-      defendant_count,
-      defendant_represented_parties_count,
-      defendant_represented_party,
-      plaintiff_represented_parties_count,
-      plaintiff_represented_party,
-      plaintiff_name,
-      plaintiff_attorneys,
-      case_link,
-      rent_owed,
-      possession,
-      ocr_plaintiff_address,
-      validated_address,
-      valdated_state_zip,
-      validation_city,
-      validation_zip_code,
-      validation_state,
-      valdated_latitude,
-      validation_longitude,
-      letter_status,
-      eviction_file_id,
+   SELECT view_data.court_case_id,
+      view_data.case_filed_on,
+      view_data.case_closed_on,
+      view_data.case_number,
+      view_data.max_judgement_date,
+      view_data.days_to_judgement,
+      view_data.defendant_name,
+      view_data.distinct_verdicts_count,
+      view_data.verdict,
+      view_data.verdict_details,
+      view_data.defendant_count,
+      view_data.defendant_represented_parties_count,
+      view_data.defendant_represented_party,
+      view_data.plaintiff_represented_parties_count,
+      view_data.plaintiff_represented_party,
+      view_data.plaintiff_name,
+      view_data.plaintiff_attorneys,
+      view_data.case_link,
+      view_data.rent_owed,
+      view_data.possession,
+      view_data.ocr_plaintiff_address,
+      view_data.validated_address,
+      view_data.valdated_state_zip,
+      view_data.validation_city,
+      view_data.validation_zip_code,
+      view_data.validation_state,
+      view_data.valdated_latitude,
+      view_data.validation_longitude,
+      view_data.letter_status,
+      view_data.eviction_file_id,
           CASE
-              WHEN (verdict ~ 'juvenile'::text) THEN 'Juvenile'::text
-              WHEN (verdict ~ 'default judgement'::text) THEN 'Default Judgement'::text
-              WHEN (verdict ~ 'judgement'::text) THEN 'Judgement'::text
-              WHEN ((verdict = ANY (ARRAY['final order'::text, 'final judgment'::text])) OR (verdict ~ 'rights of majority'::text)) THEN 'Judgement'::text
-              WHEN (verdict ~ 'deferred'::text) THEN 'Deferred'::text
-              WHEN ((verdict ~ 'consolidated'::text) OR (verdict ~ 'transferred'::text)) THEN 'Transferred'::text
-              WHEN (verdict ~ 'bankruptcy'::text) THEN 'Bankruptcy Filed'::text
-              WHEN ((verdict ~ 'dismissed'::text) AND (verdict ~ 'satisfied'::text)) THEN 'Dismissed - Satisfied'::text
-              WHEN ((verdict ~ 'settled'::text) OR (verdict ~ 'settlement'::text)) THEN 'Dismissed - Settlement'::text
-              WHEN ((verdict ~ 'dismissed'::text) OR (verdict ~ 'vacated'::text)) THEN 'Dismissed'::text
-              WHEN (verdict = 'discharge filed'::text) THEN 'Dismissed'::text
-              WHEN (case_closed_on IS NULL) THEN 'Active Case'::text
+              WHEN (view_data.verdict ~ 'juvenile'::text) THEN 'Juvenile'::text
+              WHEN (view_data.verdict ~ 'default judgement'::text) THEN 'Default Judgement'::text
+              WHEN (view_data.verdict ~ 'judgement'::text) THEN 'Judgement'::text
+              WHEN ((view_data.verdict = ANY (ARRAY['final order'::text, 'final judgment'::text])) OR (view_data.verdict ~ 'rights of majority'::text)) THEN 'Judgement'::text
+              WHEN (view_data.verdict ~ 'deferred'::text) THEN 'Deferred'::text
+              WHEN ((view_data.verdict ~ 'consolidated'::text) OR (view_data.verdict ~ 'transferred'::text)) THEN 'Transferred'::text
+              WHEN (view_data.verdict ~ 'bankruptcy'::text) THEN 'Bankruptcy Filed'::text
+              WHEN ((view_data.verdict ~ 'dismissed'::text) AND (view_data.verdict ~ 'satisfied'::text)) THEN 'Dismissed - Satisfied'::text
+              WHEN ((view_data.verdict ~ 'settled'::text) OR (view_data.verdict ~ 'settlement'::text)) THEN 'Dismissed - Settlement'::text
+              WHEN ((view_data.verdict ~ 'dismissed'::text) OR (view_data.verdict ~ 'vacated'::text)) THEN 'Dismissed'::text
+              WHEN (view_data.verdict = 'discharge filed'::text) THEN 'Dismissed'::text
+              WHEN (view_data.case_closed_on IS NULL) THEN 'Active Case'::text
               ELSE 'Other'::text
           END AS simple_judgement
      FROM view_data;
