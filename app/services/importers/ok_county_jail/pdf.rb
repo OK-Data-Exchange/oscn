@@ -15,17 +15,38 @@ module Importers
         reader = PDF::Reader.new(io)
         all_pages = []
         reader.pages.each do |page|
-          all_pages << page_to_dict(page)
+          page_data = page_to_dict(page)
+          all_pages << page_data
         end
         puts all_pages
       end
 
-      def upsert(data)
-
+      def upsert(booking_data)
+        OkCountyJail::Booking.create!(
+          booking_number: booking_data.booking_number,
+          full_name: booking_data.full_name,
+          dob: booking_data.dob,
+          booked_at: booking_data.booked_at,
+          height_in: booking_data.height,
+          weight: booking_data.weight,
+          eyes: booking_data.eyes,
+          hair_color: booking_data.hair_color,
+          hair_length: booking_data.hair_length,
+          skin: booking_data.skin
+        )
+        booking_data.offenses.each do |offense|
+          OkCountyJail::Booking.create!(
+            code: offense.code,
+            description: offense.description,
+            case_number: offense.case_number,
+            bond: offense.bond
+          )
+        end
       end
 
       def booking_data(lines)
         fields = field_map_from_sample.except(:offense_table)
+        fields, lines = adjust_for_multiline_name(lines, fields)
         data = {}
         last_line = false
         shift = 0
@@ -37,8 +58,19 @@ module Importers
           end
           data[field], shift = get_value(lines, position, shift)
         end
-        data[:offense_table] = offenses_data(lines)
+        data[:offenses] = offenses_data(lines)
         data
+      end
+
+      def adjust_for_multiline_name(lines, fields)
+        booking_header_line_index = lines.find_index{|line| line.include? "Booking#"}
+        name_line_index = fields[:full_name][:line]
+        has_multiline_name = booking_header_line_index - name_line_index == 2
+        if has_multiline_name
+          fields[:booking_number][:line] = fields[:booking_number][:line] + 1
+          fields[:full_name][:line] = [fields[:full_name][:line], fields[:full_name][:line]+1]
+        end
+        [has_multiline_name, fields]
       end
 
       def offense_table_row_shift(lines, fields)
@@ -78,16 +110,21 @@ module Importers
 
       def get_value(lines, position, shift)
         begin
-          line = lines[position[:line]]
-          return [nil, shift] unless line.present?
+          line_numbers = position[:line].is_a? Array ? position[:line] : [position[:line]]
+          final_value = ''
+          line_numbers.each do |line_number|
+            line = lines[line_number]
+            return [nil, shift] unless line.present?
 
-          value = field_value(line, position[:start], position[:end], shift)
-          while has_gap(value)
-            puts "Empty space detected. Trying shift for: #{value}"
-            shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
-            value = field_value(line, position[:start], position[:end], shift)
+            row_value = field_value(line, position[:start], position[:end], shift)
+            while has_gap(value)
+              puts "Empty space detected. Trying shift for: #{value}"
+              shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
+              row_value = field_value(line, position[:start], position[:end], shift)
+            end
+            final_value = final_value + row_value
           end
-          [value, shift]
+          [final_value, shift]
         rescue
           puts "error parsing line at:"
           puts position
@@ -122,7 +159,7 @@ module Importers
         sample_text = reader.pages[1].text.split(/\n/).compact_blank
         # Avoid PII in here. Partial data should suffice.
         @field_map = {
-          booking_number: locate_in_sample(sample_text, '140088715', nil),
+          booking_number: locate_in_sample(sample_text, '                    140088715', nil),
           full_name: locate_in_sample(sample_text, 'AHBO', '- 9/20/19'),
           dob: locate_in_sample(sample_text, '9/20/19', '03/01'),
           booked_at: locate_in_sample(sample_text, '03/01', nil),
