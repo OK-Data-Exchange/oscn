@@ -35,7 +35,7 @@ module Importers
           skin: booking_data.skin
         )
         booking_data.offenses.each do |offense|
-          OkCountyJail::Booking.create!(
+          OkCountyJail::Offense.create!(
             code: offense.code,
             description: offense.description,
             case_number: offense.case_number,
@@ -46,31 +46,34 @@ module Importers
 
       def booking_data(lines)
         fields = field_map_from_sample.except(:offense_table)
-        fields, lines = adjust_for_multiline_name(lines, fields)
+        has_multiline_name = has_multiline_name(lines, fields)
         data = {}
         last_line = false
-        shift = 0
+        row_shift = 0
+        line_shift = 0
         fields.each do |field, position|
-          line = position[:line]
+          line = position[:line] + line_shift
           if line != last_line
             last_line = line
-            shift = 0
+            row_shift = 0
           end
-          data[field], shift = get_value(lines, position, shift)
+          position[:line] = line
+          data[field], row_shift = get_value(lines, position, row_shift)
+          if has_multiline_name and field == :full_name
+            position[:line] = position[:line] + 1
+            rest_of_name, _row_shift = get_value(lines, position, row_shift)
+            data[:full_name] = data[:full_name] + rest_of_name
+            line_shift = 1
+          end
         end
         data[:offenses] = offenses_data(lines)
         data
       end
 
-      def adjust_for_multiline_name(lines, fields)
+      def has_multiline_name(lines, field_map)
         booking_header_line_index = lines.find_index{|line| line.include? "Booking#"}
-        name_line_index = fields[:full_name][:line]
-        has_multiline_name = booking_header_line_index - name_line_index == 2
-        if has_multiline_name
-          fields[:booking_number][:line] = fields[:booking_number][:line] + 1
-          fields[:full_name][:line] = [fields[:full_name][:line], fields[:full_name][:line]+1]
-        end
-        [has_multiline_name, fields]
+        name_line_index = field_map[:full_name][:line]
+        booking_header_line_index - name_line_index == 2
       end
 
       def offense_table_row_shift(lines, fields)
@@ -110,32 +113,24 @@ module Importers
 
       def get_value(lines, position, shift)
         begin
-          line_numbers = position[:line].is_a? Array ? position[:line] : [position[:line]]
-          final_value = ''
-          line_numbers.each do |line_number|
-            line = lines[line_number]
-            return [nil, shift] unless line.present?
+          line = lines[position[:line]]
+          return [nil, shift] unless line.present?
 
-            row_value = field_value(line, position[:start], position[:end], shift)
-            while has_gap(value)
-              puts "Empty space detected. Trying shift for: #{value}"
-              shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
-              row_value = field_value(line, position[:start], position[:end], shift)
-            end
-            final_value = final_value + row_value
+          value = field_value(line, position[:start], position[:end], shift)
+          while has_gap(value)
+            puts "Empty space detected. Trying shift for: #{value}"
+            shift = gap_position(value) >= 2 ? shift + 1 : shift - 1
+            value = field_value(line, position[:start], position[:end], shift)
           end
-          [final_value, shift]
-        rescue
-          puts "error parsing line at:"
-          puts position
-          puts "line before: "
-          puts lines[position[:line] - 1]
-          puts "line after: "
-          puts lines[position[:line] + 1]
+          [value, shift]
+        rescue StandardError => e
+          puts e
+          puts "error parsing line at: #{position}"
+          puts "line before, line, and line after: "
+          puts lines[position[:line] - 1..position[:line] + 1]
           [nil, shift]
         end
       end
-
       def gap_position(value)
         value.index(/[^:]\s\s/)
       end
@@ -150,8 +145,12 @@ module Importers
         line[start_position...end_position].strip
       end
 
+      def deep_clone(obj)
+        Marshal.load(Marshal.dump(obj))
+      end
+
       def field_map_from_sample
-        return @field_map if @field_map
+        return deep_clone(@field_map) if @field_map
 
         link = 'https://www.okcountydc.net/_files/ugd/413d25_a5e2f3d02e394e909a16bc4cd3c84a5a.pdf'
         io = URI.parse(link).open
@@ -160,9 +159,9 @@ module Importers
         # Avoid PII in here. Partial data should suffice.
         @field_map = {
           booking_number: locate_in_sample(sample_text, '                    140088715', nil),
-          full_name: locate_in_sample(sample_text, 'AHBO', '- 9/20/19'),
           dob: locate_in_sample(sample_text, '9/20/19', '03/01'),
           booked_at: locate_in_sample(sample_text, '03/01', nil),
+          full_name: locate_in_sample(sample_text, 'AHBO', '- 9/20/19'), # this is order specific
           height: locate_in_sample(sample_text, 'Hgt', 'Wgt'),
           weight: locate_in_sample(sample_text, 'Wgt', 'Brown Eyes'),
           eyes: locate_in_sample(sample_text, 'Brown Eyes', 'Brown Hair'),
