@@ -16,30 +16,32 @@ module Importers
         all_pages = []
         reader.pages.each do |page|
           page_data = page_to_dict(page)
+          upsert(page_data)
           all_pages << page_data
         end
         puts all_pages
       end
 
       def upsert(booking_data)
-        OkCountyJail::Booking.create!(
-          booking_number: booking_data.booking_number,
-          full_name: booking_data.full_name,
-          dob: booking_data.dob,
-          booked_at: booking_data.booked_at,
-          height_in: booking_data.height,
-          weight: booking_data.weight,
-          eyes: booking_data.eyes,
-          hair_color: booking_data.hair_color,
-          hair_length: booking_data.hair_length,
-          skin: booking_data.skin
+        booking = ::OkCountyJail::Booking.create!(
+          booking_number: booking_data[:booking_number],
+          full_name: booking_data[:full_name],
+          dob: booking_data[:dob],
+          booked_at: booking_data[:booked_at],
+          height_in: booking_data[:height],
+          weight: booking_data[:weight],
+          eyes: booking_data[:eyes],
+          hair_color: booking_data[:hair_color],
+          hair_length: booking_data[:hair_length],
+          skin: booking_data[:skin]
         )
-        booking_data.offenses.each do |offense|
-          OkCountyJail::Offense.create!(
-            code: offense.code,
-            description: offense.description,
-            case_number: offense.case_number,
-            bond: offense.bond
+        booking_data[:offenses].each do |offense|
+          ::OkCountyJail::Offense.create!(
+            booking: booking,
+            code: offense[:code],
+            description: offense[:description],
+            case_number: offense[:case_number],
+            bond: offense[:bond]
           )
         end
       end
