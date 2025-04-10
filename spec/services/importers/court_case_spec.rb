@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Importers::CourtCase do
   describe '#perform' do
-    let!(:party_type1)  { create(:party_type, :defendant) }
-    let!(:party_type2)  { create(:party_type, :plaintiff) }
+    # let!(:party_type1)  { create(:party_type, :defendant) }
+    # let!(:party_type2)  { create(:party_type, :plaintiff) }
     it 'saves data for a case' do
       # Create a case with html from fixture
       county = create(:county, name: 'Tulsa')
