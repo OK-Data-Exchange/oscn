@@ -80,12 +80,12 @@ module Importers
 
       private
 
-      def parse_date(date, voter)
+      def parse_date(date, _voter)
         return nil if date.blank?
 
         begin
           Date.strptime(date, '%m/%d/%Y')
-        rescue StandardError => e
+        rescue StandardError => _e
           puts "Error parsing date: #{date}"
         end
       end
