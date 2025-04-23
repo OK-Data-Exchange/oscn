@@ -19,7 +19,7 @@ class EvictionsMailer < ApplicationMailer
       to: ENV.fetch('EVICTIONS_EMAIL_TO', 'hmitchell@9bcorp.com'),
       cc: ENV.fetch('EVICTIONS_EMAIL_CC', 'hmitchell@9bcorp.com').split(','),
       subject: "Evictions File ID: #{@eviction_file.id}",
-      reply_to: 'info@arnallfamilyfoundation.org'
+      reply_to: 'info@okdataexchange.org'
     )
   end
 end
