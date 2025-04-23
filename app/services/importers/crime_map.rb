@@ -11,7 +11,6 @@ module Importers
       super()
       @start_date = start_date
       @end_date = end_date
-      raise 'Do not use until further notice'
     end
 
     def init_zoom_okc_metro_params
