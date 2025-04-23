@@ -43,8 +43,8 @@ jobs:
         bundle exec rails db:create
         bundle exec rails db:migrate
         bundle exec rspec
-    - name: Simplecov Report
-      uses: pi-chan/simplecov-report-group-action@v1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        resultPath: 'tmp/coverage/coverage.json'
+#    - name: Simplecov Report
+#      uses: pi-chan/simplecov-report-group-action@v1
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        resultPath: 'tmp/coverage/coverage.json'

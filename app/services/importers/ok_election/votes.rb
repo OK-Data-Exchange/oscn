@@ -12,7 +12,6 @@ module Importers
         Rails.logger.silence { new.perform }
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity
       def perform
         objects = bucket.list_objects('ok_election/voter_history')
         objects['contents'].each do |object|
@@ -41,7 +40,6 @@ module Importers
           insert_votes(votes_data)
         end
       end
-      # rubocop:enable Metrics/CyclomaticComplexity
 
       private
 

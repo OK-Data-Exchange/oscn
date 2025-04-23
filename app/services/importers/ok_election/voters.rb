@@ -49,7 +49,7 @@ module Importers
 
       #     # Process CSV with liberal parsing
       #     voters = CSV.parse(content, headers: true, encoding: 'Windows-1252:UTF-8', liberal_parsing: true)
-          
+
       #     bar = ProgressBar.new(voters.count)
 
       #     voters.each do |voter|
@@ -70,7 +70,6 @@ module Importers
       #         binding.pry
       #       end
 
-
       #       # Batch insert voters into the database
       #       voter_data.each_slice(10_000) do |slice|
       #         ::OkElection::Voter.upsert_all(slice, unique_by: :voter_id)
@@ -81,13 +80,13 @@ module Importers
 
       private
 
-      def parse_date(date, voter)
+      def parse_date(date, _voter)
         return nil if date.blank?
+
         begin
           Date.strptime(date, '%m/%d/%Y')
-        rescue => e
+        rescue StandardError => _e
           puts "Error parsing date: #{date}"
-          binding.pry
         end
       end
 
