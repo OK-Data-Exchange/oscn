@@ -1,7 +1,5 @@
-class Roster < ApplicationRecord
-  has_many :bookings, class_name: 'OkcBlotter::Booking', foreign_key: 'roster_id'
-  has_many :inmates, class_name: 'TulsaBlotter::Inmate', foreign_key: 'roster_id'
-
-  has_many :case_parties, foreign_key: 'roster_id'
-  has_many :doc_profiles, class_name: 'Doc::Profile', foreign_key: 'roster_id'
+module Roster
+  def self.table_name_prefix
+    "roster_"
+  end
 end

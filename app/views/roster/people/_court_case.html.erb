@@ -1,0 +1,64 @@
+<h5>
+  <a href="<%= court_case.case_link %>">
+    <%= court_case.case_number %>
+  </a>
+</h5>
+<!-- todo: add booking for case -->
+<ul class="list-inline text-muted">
+  <li class="list-inline-item">
+    filed on: <%= l court_case.filed_on %>
+    <% if court_case.closed_on.present? %>
+      closed on: <%= court_case.closed_on %>
+    <% else %>
+              <span class="badge bg-warning">
+                open
+              </span>
+    <% end %>
+  </li>
+  <li class="list-inline-item">
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h6>Counts</h6>
+    <% court_case.counts.each do |count| %>
+      <h7><%= count.charge ? count.charge.downcase.capitalize : count.as_filed.downcase.capitalize %></h7>
+      <p><%= count.disposition.present? ? count.disposition.downcase.capitalize : "No disposition" %></p>
+    <% end %>
+
+    <h6>Bookings</h6>
+    <% @roster_person.booking_timeline_by_case_number(court_case.case_number).each do |booking| %>
+      <%= render "roster/people/booking", booking: booking%>
+    <% end %>
+
+    <h6>Events</h6>
+    <dl>
+      <% court_case.events.order(event_at: :desc).limit(5).each do |event| %>
+        <dt>
+          <%= l event.event_at %>
+        </dt>
+        <dd>
+          <%= event.event_name.downcase.titleize %> - <%= event.docket.downcase.titleize %>
+        </dd>
+      <% end %>
+    </dl>
+
+  </div>
+  <div class="col-sm-6">
+    <h6>Docket Events</h6>
+    <dl>
+      <% court_case.docket_events.main.order(event_on: :desc).limit(10).each do |docket_event| %>
+        <dt><%= docket_event.docket_event_type.code %>: <%= l docket_event.event_on %></dt>
+        <dd>
+          <%= simple_format docket_event.description.downcase.capitalize %>
+        </dd>
+      <% end %>
+    </dl>
+    <p class="text-end">
+      <a href="<%= court_case.case_link %>">
+        more ›
+      </a>
+    </p>
+  </div>
+</div>

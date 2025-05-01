@@ -71,6 +71,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.before(:suite) do
     Rails.application.load_tasks
+    Rails.application.load_seed
   end
 end
 
@@ -83,6 +84,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 VCR.configure do |c|
+  c.allow_http_connections_when_no_cassette = true
   # This is the directory where VCR will store its "cassettes", i.e. its
   # recorded HTTP interactions.
   c.cassette_library_dir = 'spec/cassettes'

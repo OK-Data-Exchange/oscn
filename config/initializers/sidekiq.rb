@@ -1,11 +1,17 @@
 require 'sidekiq/throttled'
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV['REDISCLOUD_URL'] || 'redis://127.0.0.1:6379' }
+  config.redis = {
+    url: ENV['REDISCLOUD_URL'] || 'redis://127.0.0.1:6379',
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+  }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: ENV['REDISCLOUD_URL'] || 'redis://127.0.0.1:6379' }
+  config.redis = {
+    url: ENV['REDISCLOUD_URL'] || 'redis://127.0.0.1:6379',
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+  }
 end
 
 # Throttle OSCN requests during business hours

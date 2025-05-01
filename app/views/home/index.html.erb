@@ -1,0 +1,120 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div id="roster_form" class="my-3">
+  <form method="get">
+    <div class="row my-2">
+      <div class="col-md-6">
+        <input type="text" name="query[first_name]" class="form-control" value="<%= @first_name %>" placeholder="First Name">
+      </div>
+      <div class="col-md-6">
+        <input type="text" name="query[last_name]" class="form-control" value="<%= @last_name %>" placeholder="Last Name">
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col-md-6">
+        <input type="text" name="query[case_number]" class="form-control" value="<%= @case_number %>" placeholder="Case Number">
+      </div>
+      <div class="col-md-6">
+        <input type="text" name="query[doc_number]" class="form-control" value="<%= @doc_number %>" placeholder="DOC Number">
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col-md-6">
+        <input type="text" name="query[inmate_id]" class="form-control" value="<%= @inmate_id %>" placeholder="Inmate Id">
+      </div>
+      <div class="col-md-6">
+        <div class="form-check">
+          <input class="form-check-input" id="mergeByName" type="checkbox" name='query[merge_by_name]'
+                 <%= @merge_by_name ? 'checked' : '' %> />
+          <label class="form-check-label" for="mergeByName" data-mdb-tooltip-init title="Records will be merged by available OSCN fields:
+            first name, last name, birth month, and birth date."><span class="badge badge-primary">Beta</span> Auto
+            merge records
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div id="roster_people">
+  <% if @params[:query] %>
+    <% @roster_people.each do |roster_person| %>
+      <%= render "roster/people/person", roster_person: roster_person %>
+    <% end.empty? and begin %>
+      <div class="alert alert-info">
+        No records found.
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-primary">
+      <h2>Welcome to the Tulsa Criminal Justice lookup tool</h2>
+      <p>Please use the search to get started</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <h3>OSCN Scrape Schedule</h3>
+          <p>OSCN Cases are scraped on the following schedule: </p>
+          <dl>
+            <dt>New Cases:</dt>
+            <dd>Newly filed cases are scraped on day of filing</dd>
+            <dt>Upcoming/Recent Dockets:</dt>
+            <dd>Cases on daily dockets are scraped the week before and after</dd>
+            <dt>Open Cases:</dt>
+            <dd>Other open cases are scraped every 14 days</dd>
+            <dt>Closed Cases:</dt>
+            <dd>Closed cases are scraped every 90 days as scraper threshold allows</dd>
+          </dl>
+        </div>
+        <div class="col-sm-6">
+          <h3>Scraper Status</h3>
+          <dl>
+            <dt>Last Case Scraped:</dt>
+            <dd><%= @last_case_scrape %></dd>
+            <dt>Last Tulsa County Arrest Scraped:</dt>
+            <dd><%= @last_tulsa_blotter_scrape %></dd>
+            <!--            <dt>Last Jailnet Booking Scrape:</dt>-->
+            <!--            <dd><%#= @last_jailnet_scrape %></dd>-->
+            <dt>Last Doc Import:</dt>
+            <dd><%= @last_doc_scrape %></dd>
+          </dl>
+        </div>
+        <h2>Historic Metrics</h2>
+        <h3>OSCN Cases</h3>
+        <div class="row">
+          <% { oscn_counties_all: "All Cases", oscn_counties_cf: "Felonies", oscn_counties_cm: "Misdemeanors"}.each do |report_name, title| %>
+          <div class="col-sm-4">
+            <h5><%= title %></h5>
+            <div class="ratio ratio-1x1">
+              <canvas id="<%= report_name.to_s %>"></canvas>
+            </div>
+            <script>
+              new Chart(document.getElementById('<%= report_name.to_s %>'), {
+                type: 'line',
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                },
+                data: {
+                  labels: <%= @reports[report_name].map{|x| x[:year]}.uniq %>,
+                  datasets: [
+                    <% @reports[report_name].group_by{|x| x[:county]}.each do |county, rows| %>
+                      {
+                      label: '<%= county %>',
+                      data: [
+                        <%= @reports[report_name].map{|x| x[:year]}.uniq
+                              .map{|year| rows.find{|row| row[:year] == year} }
+                              .map{|x| x && x[:count] ? x[:count] : 0 }
+                              .join(", ") %>
+                      ],
+                      },
+                    <% end %>
+                  ]
+                },
+              });
+            </script>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
