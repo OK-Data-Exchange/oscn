@@ -1,0 +1,20 @@
+branch-defaults:
+  main:
+    environment: oscn-pd-prod
+    group_suffix: null
+  root-merge:
+    environment: oscn-pd-prod
+global:
+  application_name: oscn-pd
+  branch: null
+  default_ec2_keyname: aws-eb
+  default_platform: Ruby 3.0 running on 64bit Amazon Linux 2
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: git
+  workspace_type: Application

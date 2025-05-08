@@ -1,0 +1,24 @@
+[
+  {
+    "inmateId": "1257611",
+    "bookingId": "20180703052",
+    "docketId": "545105",
+    "docketEnteredDate": "2018-07-03T00:00:00",
+    "docketEnteredTime": "1900-01-01T23:16:59",
+    "docketType": "New Booking",
+    "docketName": "KONG, CARLSBAD C II",
+    "docketReleaseDate": "2018-07-04T00:00:00",
+    "docketReleaseReason": "112 - Bond (Surety/Cash)"
+  },
+  {
+    "inmateId": "9806923",
+    "bookingId": "20180703051",
+    "docketId": "545103",
+    "docketEnteredDate": "2018-07-03T00:00:00",
+    "docketEnteredTime": "1900-01-01T22:23:13",
+    "docketType": "New Booking",
+    "docketName": "ESPECIALIA, MARK SMIEGEL ",
+    "docketReleaseDate": "2018-07-11T00:00:00",
+    "docketReleaseReason": "471 - Another County/Okla"
+  }
+]

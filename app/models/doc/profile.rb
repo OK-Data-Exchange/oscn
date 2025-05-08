@@ -9,4 +9,32 @@ class Doc::Profile < ApplicationRecord
 
   enum status: [:active, :inactive]
   enum sex: [:male, :female]
+
+  def height_string
+    "#{height_ft}' #{height_in}\""
+  end
+
+  def current_facility
+    latest_status.facility
+  end
+
+  def latest_status
+    statuses.sort_by(&:date).reverse.first
+  end
+
+  def facility_timeline
+    timeline = []
+    statuses.sort_by(&:date).each do |status|
+      if timeline[-1] && timeline[-1][:facility] == status.facility
+        timeline[-1][:last_seen] = status.date
+      else
+        timeline << {
+          first_seen: status.date,
+          facility: status.facility,
+          last_seen: status.date
+        }
+      end
+    end
+    timeline
+  end
 end
