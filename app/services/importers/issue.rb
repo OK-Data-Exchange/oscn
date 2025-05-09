@@ -18,7 +18,7 @@ module Importers
     def perform
       issues_json.each do |issue_data|
         i = save_issue(issue_data)
-        ::Importers::IssueParty.perform(i, issue_data[:parties], logs) if i.present?
+        ::Importers::IssueParty.perform(i, issue_data[:parties], logs) if i.present? && issue_data[:parties].present?
       end
     end
 

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 
 RSpec.describe Scrapers::DistrictAttorney do
   describe '#perform' do
