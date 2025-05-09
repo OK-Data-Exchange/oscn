@@ -10,6 +10,11 @@ class County < ApplicationRecord
 
   validates :name, :fips_code, presence: true
 
+  enum rms: {
+    ocis: 'OCIS',
+    kp: 'KP'
+  }
+
   def self.name_id_mapping
     pluck(:name, :id).to_h
   end
