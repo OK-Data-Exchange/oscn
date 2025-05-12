@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en-US" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -12,15 +13,14 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="/wp-content/themes/oscn-theme/navigation-style.css?v=1.0.1">
-  <script src="/datafiles/ext/javascript-navigation/?v=1.0.0"></script>
+
   <link rel="stylesheet" href="/assets/css/normalize.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/bootstrap-2.3.2.min.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-Bx4pytHkyTDy3aJKjGkGoHPt3tvv6zlwwjc3iqN7ktaiEMLDPqLSZYts2OjKcBx1" crossorigin="anonymous">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
   <link rel="stylesheet" href="/assets/css/oscn-navigation.css">
-  <!--<link rel="stylesheet" href="/assets/css/oscn-footer.css">-->
+  <link rel="stylesheet" href="/assets/css/oscn-footer.css">
   <style>
     .bold {
       font-weight: bold;
@@ -286,22 +286,85 @@
   <![endif]-->
   <script src="/assets/js/cookies.js"></script>
   <!-- /JAVASCRIPT_TOP/ -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54280338-1', {'sampleRate': 50});
+    ga('send', 'pageview');
+  </script>
 </head>
 <body>
 <div class="wrapper">
   <!-- /ERRORMESSAGE/ -->
-  <header id="masthead" class="site-header header" data-elastic-exclude style="">
-    <div class="nav_container">
-      <a class="oscn-brand" href="https://www.oscn.net/">
-        <div class="oscn-brand-container">
-          <div class="oscn-logo"><img src="https://www.oscn.net/static/supreme-court-seal-updated-color.svg"></div>
-          <div class="oscn-full-name"><span>OKLAHOMA <br>STATE <br>COURTS <br>NETWORK </span></div>
-          <div class="oscn-abbreviation"><span>OSCN</span></div>
-        </div>
-      </a>
+  <div class="header" data-elastic-exclude>
+    <div class="accessibility">
+      <a href="#oscn-content">Skip to Main Content</a>
+      <a href="/v4/accessibility/">Accessibility Statement</a>
     </div>
-  </header><!-- #masthead -->
-
+    <div class="navigation-tophat">
+      <div class="sized">
+        <div class="left">
+          <ul>
+            <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=">Help</a></li>
+            <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="right">
+          <ul>
+            <li><a href="https://efile.oscn.net">e-filing</a></li>
+            <li><a href="https://pay.oscn.net/epayments/">e-payments</a></li>
+            <li><a href="/jobs/">Careers</a></li>
+            <!-- <li class="site-search no-border">
+                <form class="search-form" method="get" action="/search/search.aspx">
+                    <div class="search-container">
+                    <select class="template-dropdown" style="display: none;">
+                        <option class="template-option"></option>
+                    </select>
+                    <select class="search-dropdown" name="t">
+                        <optgroup label="Legal Research">
+                            <option value="citation">By Citation (QuickCite)</option>
+                            <option value="judge">By Judge</option>
+                            <option value="caselaw">Case Law (full-text)</option>
+                            <option value="statutes">Statutes &amp; Rules (full-text)</option>
+                            <option value="library">All Oklahoma Materials (full-text)</option>
+                        </optgroup>
+                        <optgroup label="Court Records">
+                            <option selected="selected" value="party">By Party Name</option>
+                            <option value="business">By Business Name</option>
+                            <option value="casenumber">By Case Number</option>
+                            <option value="traffic">By Traffic Citation</option>
+                        </optgroup>
+                    </select></div><!--
+                    <input class="search-input" type="text" value="Search" name="q"></input><!--
+                    <button class="search-button" type="submit" value="Go!"></button>
+                </form>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navigation-spectacles sized">
+      <div class="navigation-utility">
+        <div class="brand"><a href="/"><img id="logo" class="screen-logo" alt="OSCN" src="/assets/img/logo.jpg" /><img class="print-logo" alt="" src="/assets/img/logo-bw.jpg" /></a></div>
+        <div class="toggle" style="display: none;"><button type="button" data-toggle="navigation"><span class="sr-only">toggle navigation</span></button></div>
+      </div>
+      <nav>
+        <ol class="nav-menu">
+          <li class="nav-item" id="home"><a href="/v4/">Home</a></li>
+          <li class="nav-item" id="courts_menu"><a href="/courts/">Courts</a></li>
+          <li class="nav-item" id="decisions"><a href="/decisions/">Decisions</a></li>
+          <li class="nav-item" id="programs"><a href="/v4/programs/">Programs</a></li>
+          <li class="nav-item" id="news"><a href="/news/">News</a></li>
+          <li class="nav-item" id="legal-research"><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=LIBRARY">Legal Research</a></li>
+          <li class="nav-item" id="court-records"><a href="/dockets/">Court Records</a></li>
+          <li class="nav-item" id="quick-links"><a href="/v4/quicklinks/">Quick Links</a></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
   <div id="oscn-content"><div class="sized">
     <style>
       td, th { padding: 2px 5px; }
@@ -1659,373 +1722,72 @@
         <td valign="top"></td>
         <td valign="top" align="right"></td>
       </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>GAPJ</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">GARNISHMENT AFFIDAVIT (POST JUDGMENT)</font>
-            </p>
-            <p><span style="text-decoration: italic;">
-									Document Available (#1061033696)
-									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2022-1020&bc=1061033696&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
-									&nbsp;&nbsp;
-									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1061033696&cn=CS-2022-1020&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 23.00</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="GREEN"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="GREEN"><nobr>OCISR</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="GREEN">OKLAHOMA COURT INFORMATION SYSTEM REVOLVING FUND</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 25.00</font>
-        </td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>OCJC</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">OKLAHOMA COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 1.55</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>OCASA</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 5.00</font>
-        </td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>CCADMIN0155</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">COURT CLERK ADMINISTRATIVE FEE ON $1.55 COLLECTION</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 0.16</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>SJFIS</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">STATE JUDICIAL REVOLVING FUND - INTERPRETER AND TRANSLATOR SERVICES</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 0.45</font>
-        </td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>DCADMIN155</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">DISTRICT COURT ADMINISTRATIVE FEE ON $1.55 COLLECTIONS</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 0.23</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>DCADMIN05</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">DISTRICT COURT ADMINISTRATIVE FEE ON $5 COLLECTIONS</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 0.75</font>
-        </td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="GREEN"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="GREEN"><nobr>CCRMPF</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="GREEN">COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 10.00</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="GREEN"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="GREEN"><nobr>CCADMIN04</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="GREEN">COURT CLERK ADMINISTRATIVE FEE ON COLLECTIONS</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 0.50</font>
-        </td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="green"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="green"><nobr>SMF</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="green">GARNISHMENT SUMMONS</font>
-            </p>
-            <p><span style="text-decoration: italic;">
-									Document Available (#1061033697)
-									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=oklahoma&cn=CS-2022-1020&bc=1061033697&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
-									&nbsp;&nbsp;
-									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=oklahoma&bc=1061033697&cn=CS-2022-1020&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 10.00</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="BLACK"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="BLACK"><nobr>GSIMA</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="BLACK">GARNISHMENT SUMMONS ISSUED MAILED BY PLAINTIFF OR ATTORNEY</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right"></td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="BLACK"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="BLACK"><nobr>ADJUST</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="BLACK">ADJUSTING ENTRY: MONIES DUE TO AC09-CARD ALLOCATION</font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right">
-          <font color="green">$ 1.92</font>
-        </td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="000000"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="000000"><nobr>ACCOUNT</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="000000">ADJUSTING ENTRY: MONIES DUE TO THE FOLLOWING AGENCIES REDUCED BY THE FOLLOWING AMOUNTS:<BR>CS-2022-1020: AC01 CLERK FEES -$0.25<BR>CS-2022-1020: AC31 COURT CLERK REVOLVING FUND -$0.02<BR>CS-2022-1020: AC89 COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE -$0.25<BR>CS-2022-1020: AC67 DISTRICT COURT REVOLVING FUND -$0.02<BR>CS-2022-1020: AC67 DISTRICT COURT REVOLVING FUND -$0.01<BR>CS-2022-1020: AC65 STATE JUDICIAL REVOLVING FUND, INTERPRETER SVCS -$0.02<BR>CS-2022-1020: AC31 COURT CLERK REVOLVING FUND -$0.01<BR>CS-2022-1020: AC58 OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES -$0.13<BR>CS-2022-1020: AC59 COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND -$0.04<BR>CS-2022-1020: AC79 OCIS REVOLVING FUND -$0.63<BR>CS-2022-1020: AC01 CLERK FEES -$0.54<BR></font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right"></td>
-      </tr>
-      <tr class="docketRow evenRow primary-entry">
-        <td valign="top">
-          <font color="000000"><nobr>01-27-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="000000"><nobr>ACCOUNT</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="000000">RECEIPT # 2025-5777848 ON 01/27/2025. <BR />
-                PAYOR: STEPHEN BRUCE TOTAL AMOUNT PAID: $ 76.64.<BR />
-                LINE ITEMS:<BR />
-                CS-2022-1020: $32.21 ON AC01 CLERK FEES.<BR />
-                CS-2022-1020: $1.92 ON AC09 CARD ALLOCATIONS.<BR />
-                CS-2022-1020: $0.63 ON AC31 COURT CLERK REVOLVING FUND.<BR />
-                CS-2022-1020: $4.87 ON AC58 OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES.<BR />
-                CS-2022-1020: $1.51 ON AC59 COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND.<BR />
-                CS-2022-1020: $0.43 ON AC65 STATE JUDICIAL REVOLVING FUND, INTERPRETER SVCS.<BR />
-                CS-2022-1020: $0.95 ON AC67 DISTRICT COURT REVOLVING FUND.<BR />
-                CS-2022-1020: $24.37 ON AC79 OCIS REVOLVING FUND.<BR />
-                CS-2022-1020: $9.75 ON AC89 COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE.<BR /></font>
-            </p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right"></td>
-      </tr>
-      <tr class="docketRow oddRow primary-entry">
-        <td valign="top">
-          <font color="black"><nobr>03-19-2025&nbsp;</nobr></font>
-        </td>
-        <td valign="top">
-          <font class="docket_code" color="black"><nobr>ATG</nobr></font>
-        </td>
-        <td valign="top">
-          <div class="description-wrapper">
-            <p>
-              <font color="black">ANSWER TO GARNISHMENT</font>
-            </p>
-            <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
-          </div>
-        </td>
-        <td align="center" valign="top"></td>
-        <td valign="top"></td>
-        <td valign="top" align="right"></td>
-      </tr>
       </tbody>
     </table>
   </div></div>
-  <footer id="colophon" class="site-footer fullwidth" data-elastic-exclude>
-    <div class="site-info oksc-content">
-      <div class="center-brand">
-        <a class="oscn-brand" href="/">
-          <div class="oscn-brand-container">
-            <div class="oscn-logo"><img src="https://www.oscn.net/static/supreme-court-seal-updated-color.svg"></div>
-            <div class="oscn-full-name"><span>OKLAHOMA <br>STATE <br>COURTS <br>NETWORK </span></div>
-            <div class="oscn-abbreviation"><span>OSCN</span></div>
-          </div>
-        </a>
-      </div>
-      <div class="row">
-        <div class="col-xs"></div>
-        <div class="col-xs" style="text-align: center;">
-
-          The Oklahoma Supreme Court<br />
-          2100 N. Lincoln Blvd., Suite 1<br />
-          Oklahoma City, OK 73105<br />
-          <br />
-          <br />
+  <div class="footer" data-elastic-exclude>
+    <div class="container-fluid sized">
+      <div class="row-fluid">
+        <div class="contact-foot column span3">
+          <h6>oscn</h6>
+          <p>
+            EMAIL: <a href="mailto:webmaster@oscn.net">webmaster@oscn.net</a><br />
+            Oklahoma Judicial Center<br />
+            2100 N Lincoln Blvd.<br />
+            Oklahoma City, OK 73105</p>
         </div>
-        <div class="col-xs"></div>
+        <div class="courts-foot column span3">
+          <h6>courts</h6>
+          <ul class="footer-list">
+            <li><a href="http://www.oscn.net/oscn/schome/">Supreme Court of Oklahoma</a></li>
+            <li><a href="http://www.okcca.net/">Court of Criminal Appeals</a></li>
+            <li>Court of Civil Appeals</li>
+            <li><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=COURTS">District Courts</a></li>
+          </ul>
+        </div>
+        <div class="decisions-foot column span3">
+          <h6>decisions</h6>
+          <ul class="footer-list">
+            <li><a href="/decisions/">New Decisions</a></li>
+            <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSSC">Supreme Court of Oklahoma</a></li>
+            <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCR">Court of Criminal Appeals</a></li>
+            <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCV">Court of Civil Appeals</a></li>
+          </ul>
+        </div>
+        <div class="programs-foot column span3">
+          <h6>programs</h6>
+          <ul class="footer-list">
+            <li><a href="http://www.thesovereigntysymposium.com/">The Sovereignty Symposium</a></li>
+            <!--<li><a href="#">Access to Justice</a></li>-->
+            <li><a href="http://www.oscn.net/static/adr/default.aspx">Alternative Dispute Resolution</a></li>
+            <li><a href="http://www.oscn.net/static/adr/default.aspx">Early Settlement Mediation</a></li>
+            <li><a href="http://www.oscn.net/Sites/CourtImprovement/default.aspx">Children's Court Improvement Program (CIP)</a></li>
+            <li><a href="/jnc/">Judicial Nominating Commission</a></li>
+            <li><a href="http://www.oscn.net/static/forms/aoc_forms/interpreter.asp">Certified Courtroom Interpreters</a></li>
+            <li><a href="http://www.oscn.net/static/forms/aoc_forms/csr.asp">Certified Shorthand Reporters</a></li>
+            <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+          </ul>
+        </div>
       </div>
-    </div><!-- .site-info -->
-  </footer><!-- #colophon -->
+    </div>
+    <div class="shoes">
+      <div class="sized">
+        <ul>
+          <!--<li><a href="#">site map</a></li>
+          <li><a href="#">information</a></li>
+          -->
+          <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+          <li><a href="/jobs/">Careers</a></li>
+          <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="/assets/js/jquery-1.11.1.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/adobe.aria.menu.min.js"></script>
-<!--<script src="/assets/js/navigation.js"></script>-->
+<script src="/assets/js/navigation.js"></script>
 <script src="/assets/js/oscn.js"></script>
 <script src="/assets/js/table.sort.filter.js"></script>
 <script>
@@ -2040,7 +1802,7 @@
   });
 
 </script>
-<script src="/dockets/scripts/dockets.js?v=1.0.0"></script>
+<script src="/dockets/scripts/dockets.js"></script>
 <!--[if IE 7]>
 <script>
   var height = $(".home-banner").height();
