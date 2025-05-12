@@ -21,4 +21,9 @@ namespace :scrape do
         .perform_async(county_name, date.strftime('%Y-%m-%d'))
     end
   end
+
+  desc 'Validate historic case HTML still parses correctly (to detect DOM changes)'
+  task validate_html: :environment do
+    CaseHtmlValidator::ValidateAll.perform
+  end
 end

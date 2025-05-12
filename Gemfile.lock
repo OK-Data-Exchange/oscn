@@ -16,8 +16,8 @@ GIT
 
 GIT
   remote: https://github.com/AyOK-Code/oscn_scraper
-  revision: f2904ac16e675201e5a9fddec55cc9025f5c645b
-  ref: f2904ac
+  revision: 31085eeb91671466a1beba8b6cb35bcb8aa3704d
+  ref: 31085ee
   specs:
     oscn_scraper (0.1.1)
       activesupport (>= 5.0.0)
@@ -466,6 +466,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fuzzy_match
+  hashdiff
   httparty
   image_processing (~> 1.12)
   jbuilder (~> 2.7)

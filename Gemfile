@@ -19,7 +19,7 @@ gem 'mailgun-ruby', '~>1.2.14'
 gem 'monetize'
 gem 'ok2explore', git: 'https://github.com/AyOK-Code/ok2explore', ref: 'fdf184d'
 gem 'ocso_scraper', git: 'https://github.com/AyOK-Code/ocso_scraper', ref: '4023411'
-gem 'oscn_scraper', git: 'https://github.com/AyOK-Code/oscn_scraper', ref: 'f2904ac'
+gem 'oscn_scraper', git: 'https://github.com/AyOK-Code/oscn_scraper', ref: '31085ee'
 gem 'pg'
 gem 'pdf-reader'
 gem 'progress_bar'
@@ -41,6 +41,7 @@ gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'raygun4ruby'
+gem 'hashdiff'
 
 group :development, :test do
   gem 'bullet'
