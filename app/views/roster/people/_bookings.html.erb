@@ -1,0 +1,11 @@
+<% if roster_person.booking_timeline %>
+    <% roster_person.booking_timeline.each do |booking| %>
+      <div class="p-4 bg-light mb-3">
+        <%= render "roster/people/booking", booking: booking, heading_class: "h5" %>
+      </div>
+    <% end %>
+<% else %>
+  <div class="p3 bg-light">
+    <p>No bookings found</p>
+  </div>
+<% end %>

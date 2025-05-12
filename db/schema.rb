@@ -212,7 +212,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.bigint "current_judge_id"
     t.boolean "is_error", default: false, null: false
     t.boolean "enqueued", default: false, null: false
+    t.virtual "clean_case_number", type: :string, as: "\nCASE\n    WHEN ((case_number)::text ~ '^([A-Za-z]{2,3})?-?[0-9]{2,4}-[0-9]{1,8}'::text) THEN ((((\n    CASE\n        WHEN ((case_number)::text ~ '^[A-Za-z]{2,3}'::text) THEN \"substring\"((case_number)::text, '^([A-Za-z]{2,3})'::text)\n        ELSE 'CF'::text\n    END || '-'::text) ||\n    CASE\n        WHEN (length(\"substring\"((case_number)::text, '([0-9]{2,4})-'::text)) = 2) THEN\n        CASE\n            WHEN ((\"substring\"((case_number)::text, '([0-9]{2,4})-'::text))::integer <= 40) THEN ('20'::text || \"substring\"((case_number)::text, '([0-9]{2,4})-'::text))\n            ELSE ('19'::text || \"substring\"((case_number)::text, '([0-9]{2,4})-'::text))\n        END\n        ELSE \"substring\"((case_number)::text, '([0-9]{2,4})-'::text)\n    END) || '-'::text) || regexp_replace(\"substring\"((case_number)::text, '-([0-9]{1,8})$'::text), '^0+'::text, ''::text))\n    ELSE NULL::text\nEND", stored: true
+    t.index ["case_number"], name: "court_cases_case_number_index"
     t.index ["case_type_id"], name: "index_court_cases_on_case_type_id"
+    t.index ["clean_case_number"], name: "clean_court_cases_case_number_index"
     t.index ["county_id", "oscn_id"], name: "index_court_cases_on_county_id_and_oscn_id", unique: true
     t.index ["county_id"], name: "index_court_cases_on_county_id"
     t.index ["current_judge_id"], name: "index_court_cases_on_current_judge_id"
@@ -276,8 +279,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "doc_facility_id"
     t.bigint "roster_id"
+    t.index "lower((first_name)::text)", name: "doc_profiles_first_name_index_2"
+    t.index "lower((last_name)::text)", name: "doc_profiles_last_name_index_2"
     t.index ["doc_facility_id"], name: "index_doc_profiles_on_doc_facility_id"
     t.index ["doc_number"], name: "index_doc_profiles_on_doc_number", unique: true
+    t.index ["first_name"], name: "doc_profiles_first_name_index"
+    t.index ["last_name"], name: "doc_profiles_last_name_index"
     t.index ["roster_id"], name: "index_doc_profiles_on_roster_id"
   end
 
@@ -299,7 +306,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.string "sentence_id", null: false
     t.string "consecutive_to_sentence_id"
     t.bigint "doc_sentencing_county_id"
-    t.virtual "clean_case_number", type: :string, as: "\nCASE\n    WHEN ((crf_number)::text ~ 'CF-\\d{4}-[0-9]{1,4}'::text) THEN crf_number\n    WHEN ((crf_number)::text ~ '\\d{4}-[0-9]{1,4}'::text) THEN (('CF-'::text || (crf_number)::text))::character varying\n    WHEN ((crf_number)::text ~ '\\d{2}-[0-9]{1,4}'::text) THEN (('CF-20'::text || (crf_number)::text))::character varying\n    ELSE NULL::character varying\nEND", stored: true
+    t.virtual "clean_case_number", type: :string, as: "\nCASE\n    WHEN ((crf_number)::text ~ '^([A-Za-z]{2,3})?-?[0-9]{2,4}-[0-9]{1,8}'::text) THEN ((((\n    CASE\n        WHEN ((crf_number)::text ~ '^[A-Za-z]{2,3}'::text) THEN \"substring\"((crf_number)::text, '^([A-Za-z]{2,3})'::text)\n        ELSE 'CF'::text\n    END || '-'::text) ||\n    CASE\n        WHEN (length(\"substring\"((crf_number)::text, '([0-9]{2,4})-'::text)) = 2) THEN\n        CASE\n            WHEN ((\"substring\"((crf_number)::text, '([0-9]{2,4})-'::text))::integer <= 40) THEN ('20'::text || \"substring\"((crf_number)::text, '([0-9]{2,4})-'::text))\n            ELSE ('19'::text || \"substring\"((crf_number)::text, '([0-9]{2,4})-'::text))\n        END\n        ELSE \"substring\"((crf_number)::text, '([0-9]{2,4})-'::text)\n    END) || '-'::text) || regexp_replace(\"substring\"((crf_number)::text, '-([0-9]{1,8})$'::text), '^0+'::text, ''::text))\n    ELSE NULL::text\nEND", stored: true
     t.index ["court_case_id"], name: "index_doc_sentences_on_court_case_id"
     t.index ["doc_offense_code_id"], name: "index_doc_sentences_on_doc_offense_code_id"
     t.index ["doc_profile_id", "sentence_id"], name: "index_doc_sentences_on_doc_profile_id_and_sentence_id", unique: true
@@ -362,8 +369,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.boolean "is_otc_payment", default: false, null: false
     t.index ["adjustment"], name: "index_docket_events_on_adjustment", where: "(adjustment <> (0)::numeric)"
     t.index ["amount"], name: "index_docket_events_on_amount", where: "(amount <> (0)::numeric)"
+    t.index ["court_case_id", "docket_event_type_id"], name: "index_court_case_event_type"
     t.index ["court_case_id"], name: "index_docket_events_on_court_case_id"
+    t.index ["created_at"], name: "docket_events_created_at_index"
     t.index ["docket_event_type_id"], name: "index_docket_events_on_docket_event_type_id"
+    t.index ["event_on"], name: "docket_events_event_on_index"
     t.index ["party_id"], name: "index_docket_events_on_party_id"
     t.index ["payment"], name: "index_docket_events_on_payment", where: "(payment <> (0)::numeric)"
     t.index ["row_index", "court_case_id"], name: "index_docket_events_on_row_index_and_court_case_id", unique: true
@@ -450,7 +460,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.integer "number"
     t.string "name"
     t.bigint "court_case_id", null: false
-    t.bigint "count_code_id", null: false
+    t.bigint "count_code_id"
     t.date "filed_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -699,6 +709,32 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.text "status"
     t.index ["account_id", "value_type"], name: "index_ok_assessor_value_details_on_account_id_and_value_type", unique: true
     t.index ["account_id"], name: "index_ok_assessor_value_details_on_account_id"
+  end
+
+  create_table "ok_county_jail_bookings", force: :cascade do |t|
+    t.string "booking_number"
+    t.string "full_name"
+    t.date "dob"
+    t.datetime "booked_at"
+    t.integer "height_in"
+    t.integer "weight"
+    t.string "eyes"
+    t.string "hair_color"
+    t.string "hair_length"
+    t.string "skin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ok_county_jail_offenses", force: :cascade do |t|
+    t.bigint "ok_county_jail_booking_id", null: false
+    t.string "code"
+    t.string "description"
+    t.string "case_number"
+    t.string "bond"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ok_county_jail_booking_id"], name: "index_ok_county_jail_offenses_on_ok_county_jail_bookings_id"
   end
 
   create_table "ok_election_precincts", force: :cascade do |t|
@@ -1176,6 +1212,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.string "suffix"
     t.bigint "parent_party_id"
     t.boolean "enqueued", default: false
+    t.index "lower((first_name)::text)", name: "parties_first_name_index_2"
+    t.index "lower((last_name)::text)", name: "parties_last_name_index_2"
+    t.index ["first_name"], name: "parties_first_name_index"
+    t.index ["last_name"], name: "parties_last_name_index"
     t.index ["oscn_id"], name: "index_parties_on_oscn_id", unique: true
     t.index ["parent_party_id"], name: "index_parties_on_parent_party_id"
     t.index ["party_type_id"], name: "index_parties_on_party_type_id"
@@ -1216,6 +1256,110 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_party_types_on_name", unique: true
+  end
+
+  create_table "pd_bookings", force: :cascade do |t|
+    t.string "jailnet_inmate_id"
+    t.string "initial_docket_id"
+    t.string "inmate_name"
+    t.string "inmate_aka"
+    t.datetime "birth_date", precision: nil
+    t.string "city_of_birth"
+    t.string "state_of_birth"
+    t.integer "current_age"
+    t.string "race"
+    t.string "gender"
+    t.integer "height"
+    t.float "weight"
+    t.string "hair_color"
+    t.string "eye_color"
+    t.string "build"
+    t.string "complexion"
+    t.string "facial_hair"
+    t.string "martial_status"
+    t.string "emergency_contact"
+    t.string "emergency_phone"
+    t.string "drivers_state"
+    t.string "drivers_license"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.string "home_phone"
+    t.string "fbi_nbr"
+    t.string "osbi_nbr"
+    t.string "tpd_nbr"
+    t.integer "age_at_booking"
+    t.integer "age_at_release"
+    t.string "arrest_date"
+    t.string "arrest_by"
+    t.string "agency"
+    t.string "booking_date"
+    t.string "booking_by"
+    t.string "otn_nbr"
+    t.string "estimated_release_date"
+    t.string "release_date"
+    t.string "release_by"
+    t.string "release_reason"
+    t.string "weekend_server"
+    t.string "custody_level"
+    t.string "assigned_cell_id"
+    t.string "current_location"
+    t.string "booking_notes"
+    t.string "booking_alerts"
+    t.string "booking_trustees"
+    t.virtual "first_name", type: :string, as: "split_part(split_part((inmate_name)::text, ', '::text, 2), ' '::text, 1)", stored: true
+    t.virtual "last_name", type: :string, as: "split_part((inmate_name)::text, ', '::text, 1)", stored: true
+    t.virtual "clean_dlm", type: :string, as: "ltrim((jailnet_inmate_id)::text, '0'::text)", stored: true
+    t.index "lower((inmate_name)::text)", name: "pd_bookings_inmate_name_index_2"
+    t.index ["inmate_name"], name: "pd_bookings_inmate_name_index"
+  end
+
+  create_table "pd_offense_minutes", force: :cascade do |t|
+    t.bigint "offense_id", null: false
+    t.datetime "minute_date", precision: nil
+    t.string "minute"
+    t.string "minute_by"
+    t.string "judge"
+    t.string "next_proceeding"
+    t.index ["offense_id"], name: "index_pd_offense_minutes_on_offense_id"
+  end
+
+  create_table "pd_offenses", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.string "docket_id"
+    t.integer "offense_seq"
+    t.string "case_number"
+    t.string "offense_code"
+    t.string "offense_special_code"
+    t.string "offense_description"
+    t.string "offense_category"
+    t.string "court"
+    t.string "judge"
+    t.datetime "court_date", precision: nil
+    t.float "bond_amount"
+    t.string "bond_type"
+    t.integer "jail_term"
+    t.string "jail_sentence_term_type"
+    t.datetime "jail_conviction_date", precision: nil
+    t.datetime "jail_start_date", precision: nil
+    t.string "form41_filed"
+    t.string "docsentence_term"
+    t.string "docsentence_term_type"
+    t.datetime "docsentence_date", precision: nil
+    t.string "docnotified"
+    t.string "sentence_agent"
+    t.string "narative"
+    t.string "disposition"
+    t.datetime "disposition_date", precision: nil
+    t.datetime "entered_date", precision: nil
+    t.string "entered_by"
+    t.datetime "modified_date", precision: nil
+    t.string "modified_by"
+    t.virtual "clean_case_number", type: :string, as: "\nCASE\n    WHEN ((case_number)::text ~ '^[A-Za-z]{2,3}-?[0-9]{2,4}-[0-9]{2,8}'::text) THEN ((((\"substring\"((case_number)::text, '^([A-Za-z]{2,3})-?[0-9]{2,4}-[0-9]{2,8}'::text) || '-'::text) ||\n    CASE\n        WHEN (length(\"substring\"((case_number)::text, '^[A-Za-z]{2,3}-?([0-9]{2,4})-[0-9]{2,8}'::text)) = 2) THEN\n        CASE\n            WHEN ((\"substring\"((case_number)::text, '^[A-Za-z]{2,3}-?([0-9]{2,4})-[0-9]{2,8}'::text))::integer <= 40) THEN ('20'::text || \"substring\"((case_number)::text, '[A-Za-z]{2,3}-?([0-9]{2,4})-[0-9]{2,8}'::text))\n            ELSE ('19'::text || \"substring\"((case_number)::text, '[A-Za-z]{2,3}-?([0-9]{2,4})-[0-9]{2,8}'::text))\n        END\n        ELSE \"substring\"((case_number)::text, '^[A-Za-z]{2,3}-?([0-9]{2,4})-[0-9]{2,8}'::text)\n    END) || '-'::text) || regexp_replace(\"substring\"((case_number)::text, '^[A-Za-z]{2,3}-?[0-9]{2,4}-([0-9]{2,8})'::text), '^0+'::text, ''::text))\n    ELSE NULL::text\nEND", stored: true
+    t.index ["booking_id"], name: "index_pd_offenses_on_booking_id"
+    t.index ["clean_case_number"], name: "pd_offenses_clean_case_number_index"
   end
 
   create_table "pleas", force: :cascade do |t|
@@ -1305,6 +1449,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.date "freedom_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.virtual "clean_dlm", type: :string, as: "ltrim((dlm)::text, '0'::text)", stored: true
     t.index ["roster_id"], name: "index_tulsa_blotter_arrests_on_roster_id"
   end
 
@@ -1325,7 +1470,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.bigint "arrests_id"
     t.decimal "bond_amount", precision: 14, scale: 2
     t.date "court_date"
+    t.virtual "clean_case_number", type: :string, as: "\nCASE\n    WHEN ((case_number)::text ~ '^[A-Za-z]{2}-[0-9]{4}-[0-9]{1,}'::text) THEN (\"substring\"((case_number)::text, 1, 8) || regexp_replace(\"substring\"((case_number)::text, 9), '^0+'::text, ''::text))\n    WHEN ((case_number)::text ~ '^[A-Za-z]{2}-[0-9]{2}-[0-9]{1,}'::text) THEN ((((\"substring\"((case_number)::text, 1, 2) || '-'::text) ||\n    CASE\n        WHEN ((\"substring\"((case_number)::text, 4, 2))::integer <= 40) THEN ('20'::text || \"substring\"((case_number)::text, 4, 2))\n        ELSE ('19'::text || \"substring\"((case_number)::text, 4, 2))\n    END) || '-'::text) || regexp_replace(\"substring\"((case_number)::text, 7), '^0+'::text, ''::text))\n    ELSE NULL::text\nEND", stored: true
     t.index ["arrests_id"], name: "index_tulsa_blotter_offenses_on_arrests_id"
+    t.index ["clean_case_number"], name: "tulsa_blotter_offenses_clean_case_number_index"
   end
 
   create_table "tulsa_blotter_page_htmls", force: :cascade do |t|
@@ -1376,6 +1523,31 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
     t.datetime "updated_at", null: false
     t.index ["docket_id", "inmate_id"], name: "index_tulsa_city_offenses_on_docket_id_and_inmate_id", unique: true
     t.index ["inmate_id"], name: "index_tulsa_city_offenses_on_inmate_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin_role", default: false
+    t.boolean "user_role", default: true
+    t.string "otp_secret"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "verdicts", force: :cascade do |t|
@@ -1445,6 +1617,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
   add_foreign_key "ok_assessor_sales", "ok_assessor_accounts", column: "account_id"
   add_foreign_key "ok_assessor_section_township_ranges", "ok_assessor_accounts", column: "account_id"
   add_foreign_key "ok_assessor_value_details", "ok_assessor_accounts", column: "account_id"
+  add_foreign_key "ok_county_jail_offenses", "ok_county_jail_bookings"
   add_foreign_key "ok_election_precincts", "counties"
   add_foreign_key "ok_election_voters", "ok_election_precincts", column: "precinct_id"
   add_foreign_key "ok_election_votes", "ok_election_voters", column: "voter_id"
@@ -1468,6 +1641,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
   add_foreign_key "party_addresses", "parties"
   add_foreign_key "party_aliases", "parties"
   add_foreign_key "party_htmls", "parties"
+  add_foreign_key "pd_offense_minutes", "pd_offenses", column: "offense_id"
+  add_foreign_key "pd_offenses", "pd_bookings", column: "booking_id"
   add_foreign_key "structure_fires", "structure_fire_links"
   add_foreign_key "tulsa_blotter_arrest_details_htmls", "tulsa_blotter_arrests", column: "arrest_id"
   add_foreign_key "tulsa_blotter_arrests", "rosters"
@@ -2478,4 +2653,161 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
   add_index "report_oklahoma_evictions", ["court_case_id"], name: "index_report_oklahoma_evictions_on_court_case_id", unique: true
   add_index "report_oklahoma_evictions", ["max_judgement_date"], name: "index_report_oklahoma_evictions_on_max_judgement_date"
 
+  create_view "roster_cases_materialized", materialized: true, sql_definition: <<-SQL
+      SELECT oscn_court_cases.clean_case_number,
+      oscn_court_cases.id AS court_case_id,
+      doc_sentences.id AS doc_sentence_id,
+      doc_sentences.doc_profile_id,
+      pd_offenses.id AS pd_offense_id,
+      pd_offenses.booking_id AS pd_booking_id,
+      tulsa_blotter_offenses.id AS tulsa_blotter_offense_id,
+      tulsa_blotter_offenses.arrests_id AS tulsa_blotter_arrest_id
+     FROM ((((court_cases oscn_court_cases
+       JOIN counties oscn_county ON ((oscn_court_cases.county_id = oscn_county.id)))
+       LEFT JOIN doc_sentences ON ((((oscn_court_cases.clean_case_number)::text = (doc_sentences.clean_case_number)::text) AND ((doc_sentences.sentencing_county)::text ~~* ((oscn_county.name)::text || '%'::text)))))
+       LEFT JOIN pd_offenses ON ((((oscn_court_cases.clean_case_number)::text = (pd_offenses.clean_case_number)::text) AND ((oscn_county.name)::text = 'Tulsa'::text))))
+       LEFT JOIN tulsa_blotter_offenses ON ((((oscn_court_cases.clean_case_number)::text = (tulsa_blotter_offenses.clean_case_number)::text) AND ((oscn_county.name)::text = 'Tulsa'::text))));
+  SQL
+  create_view "court_case_party_counts", materialized: true, sql_definition: <<-SQL
+      SELECT court_cases.id AS court_case_id,
+      count(case_parties.party_id) AS count
+     FROM ((court_cases
+       JOIN case_parties ON ((court_cases.id = case_parties.court_case_id)))
+       JOIN parties ON ((case_parties.party_id = parties.id)))
+    WHERE (parties.party_type_id = 7)
+    GROUP BY court_cases.id;
+  SQL
+  add_index "court_case_party_counts", ["court_case_id"], name: "court_case_party_counts_court_case_id"
+
+  create_view "roster_parties_materialized", materialized: true, sql_definition: <<-SQL
+      SELECT parties.id AS party_id,
+      parties.full_name AS party_name,
+      ((parties.birth_year || '-'::text) || parties.birth_month) AS party_dob_part,
+      max((pd_bookings.jailnet_inmate_id)::text) AS jailnet_inmate_id,
+      array_agg(DISTINCT pd_bookings.inmate_name) AS pd_inmate_names,
+      array_agg(DISTINCT pd_bookings.birth_date) AS pd_dobs,
+      max(doc_profiles.doc_number) AS doc_number,
+      array_agg(DISTINCT (((doc_profiles.first_name)::text || ' '::text) || (doc_profiles.last_name)::text)) AS doc_names,
+      array_agg(DISTINCT doc_profiles.birth_date) AS doc_dobs,
+      max((tulsa_blotter_arrests.dlm)::text) AS tulsa_blotter_dlm,
+      array_agg(DISTINCT (((tulsa_blotter_arrests.first)::text || ' '::text) || (tulsa_blotter_arrests.last)::text)) AS tulsa_name
+     FROM ((((((roster_cases_materialized roster_cases
+       JOIN court_case_party_counts ON ((court_case_party_counts.court_case_id = roster_cases.court_case_id)))
+       JOIN case_parties ON ((case_parties.court_case_id = roster_cases.court_case_id)))
+       JOIN parties ON (((case_parties.party_id = parties.id) AND (parties.last_name IS NOT NULL))))
+       LEFT JOIN doc_profiles ON (((roster_cases.doc_profile_id = doc_profiles.id) AND ((court_case_party_counts.count = 1) OR (((parties.last_name)::text ~~* (doc_profiles.last_name)::text) AND ((parties.first_name)::text ~~* (doc_profiles.first_name)::text) AND ((parties.birth_year)::double precision = date_part('year'::text, doc_profiles.birth_date)) AND ((parties.birth_month)::double precision = date_part('month'::text, doc_profiles.birth_date)))))))
+       LEFT JOIN pd_bookings ON (((roster_cases.pd_booking_id = pd_bookings.id) AND ((parties.birth_year)::double precision = date_part('year'::text, pd_bookings.birth_date)) AND ((parties.birth_month)::double precision = date_part('month'::text, pd_bookings.birth_date)) AND ((court_case_party_counts.count = 1) OR ((pd_bookings.inmate_name)::text ~~* ((((parties.last_name)::text || ', '::text) || (parties.first_name)::text) || ' %'::text))))))
+       LEFT JOIN tulsa_blotter_arrests ON (((roster_cases.tulsa_blotter_arrest_id = tulsa_blotter_arrests.id) AND (((court_case_party_counts.count = 1) AND (((parties.last_name)::text ~~* (tulsa_blotter_arrests.last)::text) OR ((parties.first_name)::text ~~* (tulsa_blotter_arrests.first)::text))) OR (((parties.last_name)::text ~~* (tulsa_blotter_arrests.last)::text) AND ((parties.first_name)::text ~~* (tulsa_blotter_arrests.first)::text))))))
+    GROUP BY parties.id;
+  SQL
+  create_view "roster_people_materialized2", materialized: true, sql_definition: <<-SQL
+      SELECT roster_parties_materialized.party_id,
+      COALESCE(ltrim(roster_parties_materialized.jailnet_inmate_id, '0'::text), ltrim(roster_parties_materialized.tulsa_blotter_dlm, '0'::text), (tulsa_blotter_arrests.clean_dlm)::text, (pd_bookings.clean_dlm)::text) AS dlm,
+      roster_parties_materialized.doc_number
+     FROM ((roster_parties_materialized
+       FULL JOIN pd_bookings ON ((roster_parties_materialized.jailnet_inmate_id = (pd_bookings.jailnet_inmate_id)::text)))
+       FULL JOIN tulsa_blotter_arrests ON ((roster_parties_materialized.tulsa_blotter_dlm = (tulsa_blotter_arrests.dlm)::text)))
+    GROUP BY roster_parties_materialized.party_id, COALESCE(ltrim(roster_parties_materialized.jailnet_inmate_id, '0'::text), ltrim(roster_parties_materialized.tulsa_blotter_dlm, '0'::text), (tulsa_blotter_arrests.clean_dlm)::text, (pd_bookings.clean_dlm)::text), roster_parties_materialized.doc_number;
+  SQL
+  create_view "roster_people_with_id", materialized: true, sql_definition: <<-SQL
+      SELECT row_number() OVER () AS id,
+      roster_people_materialized2.party_id,
+      roster_people_materialized2.dlm,
+      roster_people_materialized2.doc_number
+     FROM roster_people_materialized2;
+  SQL
+  add_index "roster_people_with_id", ["dlm"], name: "dlm_roster_people_with_id"
+  add_index "roster_people_with_id", ["doc_number"], name: "doc_number_roster_people_with_id"
+  add_index "roster_people_with_id", ["id"], name: "id_roster_people_with_id", unique: true
+  add_index "roster_people_with_id", ["party_id"], name: "party_id_roster_people_with_id"
+
+  create_view "roster_people_merged", materialized: true, sql_definition: <<-SQL
+      WITH RECURSIVE al(tail, head) AS (
+           SELECT f.id,
+              g.id
+             FROM (roster_people_with_id f
+               JOIN roster_people_with_id g ON (((f.party_id = g.party_id) OR (f.dlm = g.dlm) OR (f.doc_number = g.doc_number))))
+          ), tc(tail, head) AS (
+           SELECT al.tail,
+              al.head
+             FROM al
+          UNION
+           SELECT f.tail,
+              g.head
+             FROM (al f
+               JOIN tc g ON ((f.head = g.tail)))
+          ), cc(head, ids) AS (
+           SELECT tc.head,
+              array_agg(DISTINCT tc.tail ORDER BY tc.tail) AS ids
+             FROM tc
+            GROUP BY tc.head
+          )
+   SELECT cc.ids,
+      array_remove(array_agg(DISTINCT roster_people_with_id.party_id ORDER BY roster_people_with_id.party_id), NULL::bigint) AS party_ids,
+      array_remove(array_agg(DISTINCT roster_people_with_id.dlm ORDER BY roster_people_with_id.dlm), NULL::text) AS dlms,
+      array_remove(array_agg(DISTINCT roster_people_with_id.doc_number ORDER BY roster_people_with_id.doc_number), NULL::integer) AS doc_numbers
+     FROM (cc
+       JOIN roster_people_with_id ON ((cc.head = roster_people_with_id.id)))
+    GROUP BY cc.ids;
+  SQL
+  add_index "roster_people_merged", ["dlms"], name: "dlms_roster_people_merged"
+  add_index "roster_people_merged", ["doc_numbers"], name: "doc_numbers_people_merged"
+  add_index "roster_people_merged", ["party_ids"], name: "party_ids_roster_people_merged"
+
+  create_view "roster_people_merged_dlms", materialized: true, sql_definition: <<-SQL
+      SELECT roster_people_merged.ids AS roster_people_merged_id,
+      unnest(roster_people_merged.dlms) AS dlm
+     FROM roster_people_merged;
+  SQL
+  add_index "roster_people_merged_dlms", ["dlm"], name: "dlm_roster_people_merged_dlms"
+  add_index "roster_people_merged_dlms", ["roster_people_merged_id"], name: "ids_roster_people_merged_dlms"
+
+  create_view "roster_people_merged_doc_numbers", materialized: true, sql_definition: <<-SQL
+      SELECT roster_people_merged.ids AS roster_people_merged_id,
+      unnest(roster_people_merged.doc_numbers) AS doc_number
+     FROM roster_people_merged;
+  SQL
+  add_index "roster_people_merged_doc_numbers", ["doc_number"], name: "doc_numbers_roster_people_merged_doc_number"
+  add_index "roster_people_merged_doc_numbers", ["roster_people_merged_id"], name: "ids_numbers_roster_people_merged_doc_number"
+
+  create_view "roster_people_merged_parties", materialized: true, sql_definition: <<-SQL
+      SELECT roster_people_merged.ids AS roster_people_merged_id,
+      unnest(roster_people_merged.party_ids) AS party_id
+     FROM roster_people_merged;
+  SQL
+  add_index "roster_people_merged_parties", ["party_id"], name: "party_id_roster_people_merged_parties"
+  add_index "roster_people_merged_parties", ["roster_people_merged_id"], name: "ids_roster_people_merged_parties"
+
+  create_view "roster_people_details", materialized: true, sql_definition: <<-SQL
+      SELECT row_number() OVER () AS id,
+      COALESCE(((((((main.last_name || '__'::text) || main.first_name) || '__'::text) || main.birth_year) || '__'::text) || main.birth_month), ((main.roster_people_merged_id)::character varying)::text) AS roster_people_details_merged_id,
+      main.roster_people_merged_id,
+      main.first_name,
+      main.last_name,
+      main.birth_year,
+      main.birth_month
+     FROM ( SELECT roster_people_merged.ids AS roster_people_merged_id,
+              COALESCE(max(upper((parties.first_name)::text)), max(upper((pd_bookings.first_name)::text)), max(upper((tulsa_blotter_arrests.first)::text)), max(upper((doc_profiles.first_name)::text))) AS first_name,
+              COALESCE(max(upper((parties.last_name)::text)), max(upper((pd_bookings.last_name)::text)), max(upper((tulsa_blotter_arrests.last)::text)), max(upper((doc_profiles.last_name)::text))) AS last_name,
+              COALESCE((max(parties.birth_year))::double precision, max(date_part('year'::text, pd_bookings.birth_date)), max(date_part('year'::text, doc_profiles.birth_date))) AS birth_year,
+              COALESCE((max(parties.birth_month))::double precision, max(date_part('month'::text, pd_bookings.birth_date)), max(date_part('month'::text, doc_profiles.birth_date))) AS birth_month
+             FROM (((((((roster_people_merged
+               LEFT JOIN roster_people_merged_dlms ON ((roster_people_merged_dlms.roster_people_merged_id = roster_people_merged.ids)))
+               LEFT JOIN pd_bookings ON (((pd_bookings.jailnet_inmate_id)::text = roster_people_merged_dlms.dlm)))
+               LEFT JOIN tulsa_blotter_arrests ON (((tulsa_blotter_arrests.dlm)::text = roster_people_merged_dlms.dlm)))
+               LEFT JOIN roster_people_merged_parties ON ((roster_people_merged_parties.roster_people_merged_id = roster_people_merged.ids)))
+               LEFT JOIN parties ON ((parties.id = roster_people_merged_parties.party_id)))
+               LEFT JOIN roster_people_merged_doc_numbers ON ((roster_people_merged_doc_numbers.roster_people_merged_id = roster_people_merged.ids)))
+               LEFT JOIN doc_profiles ON ((doc_profiles.doc_number = roster_people_merged_doc_numbers.doc_number)))
+            GROUP BY roster_people_merged.ids) main;
+  SQL
+  create_view "roster_people_details_merged", materialized: true, sql_definition: <<-SQL
+      SELECT roster_people_details.roster_people_details_merged_id AS id,
+      roster_people_details.first_name,
+      roster_people_details.last_name,
+      roster_people_details.birth_month,
+      roster_people_details.birth_year
+     FROM roster_people_details
+    GROUP BY roster_people_details.roster_people_details_merged_id, roster_people_details.first_name, roster_people_details.last_name, roster_people_details.birth_month, roster_people_details.birth_year;
+  SQL
 end

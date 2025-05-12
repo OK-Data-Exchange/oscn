@@ -1,0 +1,107 @@
+<div class="bg-white p-4 mb-3">
+  <h4>
+    <a href="<%= roster_person.url %>">
+      <%= roster_person.first_name %> <%= roster_person.last_name %>
+    </a>
+  </h4>
+  <ul class="list-inline text-muted">
+    <li class="list-inline-item">oscn: <%= roster_person.party_ids.join(", ") %></li>
+    <li class="list-inline-item">dlm: <%= roster_person.dlms.join(", ") %></li>
+    <li class="list-inline-item">
+      doc:
+      <% roster_person.doc_numbers.each do |doc_number| %>
+        <a href="#" data-copy data-mdb-tooltip-init title="Click to copy to clipboard and paste into DOC Search">
+          <%= doc_number %>
+        </a>
+      <% end %>
+      <% if roster_person.doc_numbers.present? %>
+        &nbsp;<a class="btn btn-outline-secondary btn-xs" target=_blank href="https://okoffender.doc.ok.gov/">DOC Search</a>
+      <% end %>
+    </li>
+  </ul>
+  <ul class="list-inline text-muted">
+    <li class="list-inline-item">
+      Birth date: <%= roster_person.birth_date %>
+    </li>
+    <li class="list-inline-item">
+      Race: <%= roster_person.race %>
+    </li>
+    <li class="list-inline-item">
+      Height: <%= roster_person.height %>
+    </li>
+    <li class="list-inline-item">
+      Zip: <%= roster_person.zip %>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-sm-6">
+      <h5>Case Summary</h5>
+      <% if roster_person.party %>
+        <dl>
+          <dt>Latest</dt>
+          <dd>
+            <a href="<%= roster_person.latest_case.case_link %>">
+              <%= roster_person.latest_case.case_number %>
+            </a>
+            filed on <%= roster_person.latest_case.filed_on %>
+          </dd>
+          <dt>Oldest</dt>
+          <dd>
+            <% if roster_person.latest_case != roster_person.oldest_case %>
+              <a href="<%= roster_person.oldest_case.case_link %>">
+                <%= roster_person.oldest_case.case_number %>
+              </a>
+              filed on <%= roster_person.oldest_case.filed_on %>
+            <% else %>
+              -
+            <% end %>
+          </dd>
+          <dt>Outstanding Cases</dt>
+          <dd><%= roster_person.court_cases.reject { |v| v.closed_on }.count %></dd>
+          <dt>Closed Cases</dt>
+          <dd><%= roster_person.court_cases.select { |v| v.closed_on }.count %></dd>
+        </dl>
+      <% else %>
+        No cases found in Tulsa County.
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <h5>Bookings Summary</h5>
+      <section>
+        <% if roster_person.booking_timeline.count > 0 %>
+          <dl>
+            <dt>Latest</dt>
+            <dd>
+              <%= l roster_person.booking_timeline.first.booking_arrested_at %>
+              -
+              <% if roster_person.booking_timeline.first.booking_released_at %>
+                <%= l roster_person.booking_timeline.first.booking_released_at %>
+              <% else %>
+                current/unknown
+              <% end %>
+              at
+              <%= roster_person.booking_timeline.first.booking_facility.downcase.titleize %>
+            </dd>
+            <dt>Oldest</dt>
+            <dd>
+              <%= l roster_person.booking_timeline.last.booking_arrested_at %> -
+              <% if roster_person.booking_timeline.last.booking_released_at %>
+                <%= l roster_person.booking_timeline.last.booking_released_at %>
+              <% else %>
+                current/unknown
+              <% end %>
+                at
+              <%= roster_person.booking_timeline.last.booking_facility.downcase.titleize %>
+            </dd>
+            <dt>Total Bookings</dt>
+            <dd>
+              <%= roster_person.booking_timeline.count %>
+            </dd>
+          </dl>
+        <% else %>
+          <p>No bookings found</p>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>

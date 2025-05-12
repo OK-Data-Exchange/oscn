@@ -1,3 +1,5 @@
+require 'date'
+
 class Party < ApplicationRecord
   belongs_to :party_type
   belongs_to :parent_party, optional: true
@@ -20,4 +22,12 @@ class Party < ApplicationRecord
   scope :with_parent, -> { where.not(parent_party_id: nil) }
   scope :arresting_agency, -> { joins(:party_type).where(party_types: { name: 'arresting_agency' }) }
   scope :defendant, -> { joins(:party_type).where(party_types: { name: 'defendant' }) }
+
+  def birth_date_string
+    "#{Date::ABBR_MONTHNAMES[birth_month]}, #{birth_year}" if birth_month and birth_year
+  end
+
+  def most_recent_address
+    addresses.sort_by(&:record_on).reverse.first
+  end
 end

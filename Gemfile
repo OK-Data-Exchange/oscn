@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.3'
+gem "sprockets-rails"
+gem "importmap-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem 'rufus-scheduler' #todo: move this to heroku scheduling
+gem 'devise-two-factor' #todo: remove?
 
 gem "azure-storage-blob", require: false
 gem 'awesome_print'
@@ -41,6 +47,11 @@ gem 'net-smtp', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'raygun4ruby'
+gem 'listen', '~> 3.2'
+
+gem 'devise'
+gem 'cancancan'
+gem 'devise-passwordless'
 
 group :development, :test do
   gem 'bullet'
@@ -68,7 +79,6 @@ end
 group :development do
   gem 'rails-erd'
   gem 'letter_opener'
-  gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

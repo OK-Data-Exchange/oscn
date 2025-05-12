@@ -1,0 +1,186 @@
+{
+  "inmateName": "ROBERTSON, DOVI CARLBAD",
+  "bookingDate": "2001-03-08T00:00:00",
+  "bookingTime": "1899-12-30T22:14:00",
+  "inmateId": "0000185",
+  "bookingId": "952202",
+  "docketId": "952902",
+  "offenseSeq": 453321,
+  "caseNumber": "CF01-1482",
+  "offenseCode": "47-10-103-A2",
+  "offenseSpecialCode": null,
+  "offenseDescription": "HIT/RUN INJURY ACCIDENT",
+  "offenseCategory": "FELONY",
+  "court": "SNT - Sentence to Jail",
+  "judge": "GILLERT",
+  "courtDate": "2001-12-19T00:00:00",
+  "courtTime": "1899-12-30T09:30:00",
+  "bondAmount": 0.0,
+  "bondType": null,
+  "jailTerm": 1,
+  "jailSentenceTermType": "Year",
+  "jailConvictionDate": "2002-01-28T00:00:00",
+  "jailStartDate": "2002-01-28T00:00:00",
+  "form41Filed": null,
+  "docsentenceTerm": null,
+  "docsentenceTermType": null,
+  "docsentenceDate": null,
+  "docnotified": null,
+  "sentenceAgent": null,
+  "narative": null,
+  "disposition": "121 - Atty/Personal Recognizance",
+  "dispositionDate": "2001-12-19T00:00:00",
+  "dispositionTime": "1899-12-30T13:15:00",
+  "enteredDate": null,
+  "enteredTime": null,
+  "enteredBy": null,
+  "modifiedDate": "2002-01-28T00:00:00",
+  "modifiedTime": "2002-01-28T17:15:26",
+  "modifiedBy": "jholloway",
+  "offenseMinutes": [
+    {
+      "minuteDate": "2001-03-09T00:00:00",
+      "minuteTime": null,
+      "minute": "BOND...RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-03-09T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS...RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-03-14T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS....RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-03-21T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS...RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-03-22T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS....RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-03-28T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS....RY",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-04-04T00:00:00",
+      "minuteTime": null,
+      "minute": "PLEM...SKH",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-04-24T00:00:00",
+      "minuteTime": null,
+      "minute": "PASSED....DP",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-05-08T00:00:00",
+      "minuteTime": null,
+      "minute": "B/O DATE...JB",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-05-14T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS....STC",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-06-11T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS...STC",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-09-04T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS FOR PSI.....STC",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-09-24T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS....STC",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-10-15T00:00:00",
+      "minuteTime": null,
+      "minute": "PASS...RMF",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-10-19T00:00:00",
+      "minuteTime": null,
+      "minute": "PASSED...MT",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-12-17T00:00:00",
+      "minuteTime": "2001-12-17T18:11:51",
+      "minute": "PASS..MLF",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    },
+    {
+      "minuteDate": "2001-12-19T00:00:00",
+      "minuteTime": "1899-12-30T09:30:00",
+      "minute": "COURT - FROM CONVERSION",
+      "minuteBy": null,
+      "judge": "GILLERT",
+      "nextProceeding": "SNT - Sentence to Jail"
+    },
+    {
+      "minuteDate": "2002-01-28T00:00:00",
+      "minuteTime": "2002-01-28T17:15:29",
+      "minute": "SENT TCJ 1 YR - TES",
+      "minuteBy": null,
+      "judge": null,
+      "nextProceeding": null
+    }
+  ]
+}

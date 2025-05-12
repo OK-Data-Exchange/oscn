@@ -1,4 +1,3 @@
-require 'byebug'
 module Scrapers
   class DistrictAttorney
     attr_reader :district_json

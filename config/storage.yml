@@ -6,8 +6,8 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-azure:
-  service: AzureStorage
-  storage_account_name: <%= ENV.fetch('AZURE_STORAGE_NAME', '') %>
-  storage_access_key: <%= ENV.fetch('AZURE_STORAGE_KEY', '') %>
-  container: <%= ENV.fetch('AZURE_STORAGE_CONTAINER', '') %>
+#azure:
+#  service: AzureStorage
+#  storage_account_name: <%#= ENV.fetch('AZURE_STORAGE_NAME', '') %>
+#  storage_access_key: <%#= ENV.fetch('AZURE_STORAGE_KEY', '') %>
+#  container: <%#= ENV.fetch('AZURE_STORAGE_CONTAINER', '') %>

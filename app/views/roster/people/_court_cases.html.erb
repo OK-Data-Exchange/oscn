@@ -1,0 +1,71 @@
+<div class="p-3 bg-white">
+  <!-- Tabs navs -->
+  <ul class="nav nav-tabs mb-3" id="cases" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="cases-tab-all"
+        data-mdb-toggle="tab"
+        href="#cases-content-all"
+        role="tab"
+        aria-controls="cases-content-all"
+        aria-selected="true"
+      >All</a
+      >
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="cases-tab-open"
+        data-mdb-toggle="tab"
+        href="#cases-content-open"
+        role="tab"
+        aria-controls="cases-content-open"
+        aria-selected="false"
+      >Open</a
+      >
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="cases-tab-closed"
+        data-mdb-toggle="tab"
+        href="#cases-content-closed"
+        role="tab"
+        aria-controls="cases-content-closed"
+        aria-selected="false"
+      >Closed</a
+      >
+    </li>
+  </ul>
+
+  <!-- Cases Tabs -->
+  <div class="tab-content" id="cases-content">
+    <div
+      class="tab-pane fade show active"
+      id="cases-content-all"
+      role="tabpanel"
+      aria-labelledby="cases-tab-all"
+    >
+      <% @roster_person.court_cases.each do |court_case| %>
+        <%= render "roster/people/court_case", court_case: court_case, roster_person: @roster_person %>
+        <hr/>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="cases-content-open" role="tabpanel" aria-labelledby="cases-tab-open">
+      <% @roster_person.court_cases.select{|x| x.closed_on == nil}.each do |court_case| %>
+        <%= render "roster/people/court_case", court_case: court_case, roster_person: @roster_person %>
+        <hr/>
+      <% end %>
+      ---
+    </div>
+    <div class="tab-pane fade" id="cases-content-closed" role="tabpanel" aria-labelledby="cases-tab-closed">
+      <% @roster_person.court_cases.select{|x| x.closed_on != nil}.each do |court_case| %>
+        <%= render "roster/people/court_case", court_case: court_case, roster_person: @roster_person %>
+        <hr/>
+      <% end %>
+      ---
+    </div>
+  </div>
+  <!-- Tabs content -->
+</div>

@@ -1,0 +1,25 @@
+<h1>Hello User Detail</h1>
+<div><%= @user.email %></div>
+
+<%= form_with model: User, url: user_path, method: :patch, local: true, scope: :user do |f| %>
+
+    <div class="field">
+    <%= f.label :password, "New password" %><br />
+    <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+    <% end %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "new email" %><br />
+    <%= f.email_field :email, autocomplete: "new-email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Change User" %>
+  </div>
+  
+    
+  
+  <% end %>

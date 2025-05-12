@@ -1,0 +1,7 @@
+<p>Hello <%= @resource.email %>!</p>
+
+<p>You your login code is below:</p>
+
+<p><%= @token %></p>
+
+<p>Note that the token will expire in <%= Devise.passwordless_login_within.inspect %>.</p>
