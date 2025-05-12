@@ -1,0 +1,368 @@
+[
+  {
+    "event_number": 0,
+    "date": "2023-11-30",
+    "code": "TEXT",
+    "description": "CIVIL RELIEF LESS THAN $10,000 INITIAL FILING.",
+    "count": "1",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 1,
+    "date": "2023-11-30",
+    "code": "INDEBT",
+    "description": "INDEBTEDNESS",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 2,
+    "date": "2023-11-30",
+    "code": "DMFE",
+    "description": "DISPUTE MEDIATION FEE",
+    "count": "",
+    "party": "",
+    "amount": "$ 7.00",
+    "links": []
+  },
+  {
+    "event_number": 3,
+    "date": "2023-11-30",
+    "code": "PFE1",
+    "description": "PETITION",
+    "count": "",
+    "party": "",
+    "amount": "$ 150.00",
+    "links": []
+  },
+  {
+    "event_number": 4,
+    "date": "2023-11-30",
+    "code": "PFE7",
+    "description": "LAW LIBRARY FEE",
+    "count": "",
+    "party": "",
+    "amount": "$ 6.00",
+    "links": []
+  },
+  {
+    "event_number": 5,
+    "date": "2023-11-30",
+    "code": "OCISR",
+    "description": "OKLAHOMA COURT INFORMATION SYSTEM REVOLVING FUND",
+    "count": "",
+    "party": "",
+    "amount": "$ 25.00",
+    "links": []
+  },
+  {
+    "event_number": 6,
+    "date": "2023-11-30",
+    "code": "OCJC",
+    "description": "OKLAHOMA COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND",
+    "count": "",
+    "party": "",
+    "amount": "$ 1.55",
+    "links": []
+  },
+  {
+    "event_number": 7,
+    "date": "2023-11-30",
+    "code": "OCASA",
+    "description": "OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES",
+    "count": "",
+    "party": "",
+    "amount": "$ 5.00",
+    "links": []
+  },
+  {
+    "event_number": 8,
+    "date": "2023-11-30",
+    "code": "SSFCHSCPC",
+    "description": "SHERIFF'S SERVICE FEE FOR COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER",
+    "count": "",
+    "party": "",
+    "amount": "$ 10.00",
+    "links": []
+  },
+  {
+    "event_number": 9,
+    "date": "2023-11-30",
+    "code": "CCADMINCSF",
+    "description": "COURT CLERK ADMINISTRATIVE FEE ON COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER",
+    "count": "",
+    "party": "",
+    "amount": "$ 1.00",
+    "links": []
+  },
+  {
+    "event_number": 10,
+    "date": "2023-11-30",
+    "code": "CCADMIN0155",
+    "description": "COURT CLERK ADMINISTRATIVE FEE ON $1.55 COLLECTION",
+    "count": "",
+    "party": "",
+    "amount": "$ 0.16",
+    "links": []
+  },
+  {
+    "event_number": 11,
+    "date": "2023-11-30",
+    "code": "SJFIS",
+    "description": "STATE JUDICIAL REVOLVING FUND - INTERPRETER AND TRANSLATOR SERVICES",
+    "count": "",
+    "party": "",
+    "amount": "$ 0.45",
+    "links": []
+  },
+  {
+    "event_number": 12,
+    "date": "2023-11-30",
+    "code": "DCADMIN155",
+    "description": "DISTRICT COURT ADMINISTRATIVE FEE ON $1.55 COLLECTIONS",
+    "count": "",
+    "party": "",
+    "amount": "$ 0.23",
+    "links": []
+  },
+  {
+    "event_number": 13,
+    "date": "2023-11-30",
+    "code": "DCADMIN05",
+    "description": "DISTRICT COURT ADMINISTRATIVE FEE ON $5 COLLECTIONS",
+    "count": "",
+    "party": "",
+    "amount": "$ 0.75",
+    "links": []
+  },
+  {
+    "event_number": 14,
+    "date": "2023-11-30",
+    "code": "DCADMINCSF",
+    "description": "DISTRICT COURT ADMINISTRATIVE FEE ON COURTHOUSE SECURITY PER BOARD OF COUNTY COMMISSIONER",
+    "count": "",
+    "party": "",
+    "amount": "$ 1.50",
+    "links": []
+  },
+  {
+    "event_number": 15,
+    "date": "2023-11-30",
+    "code": "CCRMPF",
+    "description": "COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE",
+    "count": "",
+    "party": "",
+    "amount": "$ 10.00",
+    "links": []
+  },
+  {
+    "event_number": 16,
+    "date": "2023-11-30",
+    "code": "CCADMIN04",
+    "description": "COURT CLERK ADMINISTRATIVE FEE ON COLLECTIONS",
+    "count": "",
+    "party": "",
+    "amount": "$ 0.50",
+    "links": []
+  },
+  {
+    "event_number": 17,
+    "date": "2023-11-30",
+    "code": "LTF",
+    "description": "LENGTHY TRIAL FUND",
+    "count": "",
+    "party": "",
+    "amount": "$ 10.00",
+    "links": []
+  },
+  {
+    "event_number": 18,
+    "date": "2023-11-30",
+    "code": "SMF",
+    "description": "SUMMONS FEE (CLERKS FEE)",
+    "count": "",
+    "party": "",
+    "amount": "$ 10.00",
+    "links": []
+  },
+  {
+    "event_number": 19,
+    "date": "2023-11-30",
+    "code": "P",
+    "description": "PETITION ON AN ACCOUNT AND MONEY LENT Document Available at Court Clerk's Office",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 20,
+    "date": "2023-11-30",
+    "code": "ANMS",
+    "description": "AFFIDAVIT AS TO MILITARY SERVICE Document Available (#1057239064) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1057239064\u0026fmt=tif",
+        "oscn_id": "1057239064"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1057239064\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1057239064"
+      }
+    ]
+  },
+  {
+    "event_number": 21,
+    "date": "2023-11-30",
+    "code": "TEXT",
+    "description": "OCIS HAS AUTOMATICALLY ASSIGNED JUDGE COLLINS, APRIL TO THIS CASE.",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 22,
+    "date": "2023-11-30",
+    "code": "ACCOUNT",
+    "description": "RECEIPT # 2023-5526141 ON 11/30/2023. PAYOR: ABC LEGAL SERVICES LLC TOTAL AMOUNT PAID: $ 239.14. LINE ITEMS: CS-2023-9684: $160.00 ON AC01 CLERK FEES. CS-2023-9684: $6.00 ON AC23 LAW LIBRARY FEE CIVIL AND CRIMINAL. CS-2023-9684: $1.66 ON AC31 COURT CLERK REVOLVING FUND. CS-2023-9684: $5.00 ON AC58 OKLAHOMA COURT APPOINTED SPECIAL ADVOCATES. CS-2023-9684: $1.55 ON AC59 COUNCIL ON JUDICIAL COMPLAINTS REVOLVING FUND. CS-2023-9684: $7.00 ON AC64 DISPUTE MEDIATION FEES CIVIL ONLY. CS-2023-9684: $0.45 ON AC65 STATE JUDICIAL REVOLVING FUND, INTERPRETER SVCS. CS-2023-9684: $2.48 ON AC67 DISTRICT COURT REVOLVING FUND. CS-2023-9684: $25.00 ON AC79 OCIS REVOLVING FUND. CS-2023-9684: $10.00 ON AC81 LENGTHY TRIAL FUND. CS-2023-9684: $10.00 ON AC88 SHERIFF’S SERVICE FEE FOR COURT HOUSE SECURITY. CS-2023-9684: $10.00 ON AC89 COURT CLERK'S RECORDS MANAGEMENT AND PRESERVATION FEE.",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 23,
+    "date": "2023-12-11",
+    "code": "SMS",
+    "description": "SUMMONS RETURNED, SERVED: JOHN O. PAUL BY PERS. SERV. ON 12/6/23 Document Available (#1056953663) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1056953663\u0026fmt=tif",
+        "oscn_id": "1056953663"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1056953663\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1056953663"
+      }
+    ]
+  },
+  {
+    "event_number": 24,
+    "date": "2024-01-29",
+    "code": "MODJ",
+    "description": "PLAINTIFF'S MOTION FOR DEFAULT JUDGMENT Document Available (#1057706599) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1057706599\u0026fmt=tif",
+        "oscn_id": "1057706599"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1057706599\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1057706599"
+      }
+    ]
+  },
+  {
+    "event_number": 25,
+    "date": "2024-04-15",
+    "code": "CNOTE",
+    "description": "JUDGMENT PRESENT TO COURT/COURT RETURNED FOR CORRECTIONS (NEED WET SIGNATURE NOT PHOTO COPIED)",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 26,
+    "date": "2024-04-15",
+    "code": "ANMS",
+    "description": "DECLARATION AS TO MILITARY SERVICE Document Available (#1058533584) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1058533584\u0026fmt=tif",
+        "oscn_id": "1058533584"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1058533584\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1058533584"
+      }
+    ]
+  },
+  {
+    "event_number": 27,
+    "date": "2024-06-28",
+    "code": "ANMS",
+    "description": "DECLARATION AS TO MILITARY SERVICE Document Available (#1059085980) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1059085980\u0026fmt=tif",
+        "oscn_id": "1059085980"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1059085980\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1059085980"
+      }
+    ]
+  },
+  {
+    "event_number": 28,
+    "date": "2024-07-17",
+    "code": "DISPCVDJ",
+    "description": "JUDGE COLLINS/ JOURNAL ENTRY OF DEFAULT JUDGEMENT",
+    "count": "1",
+    "party": "Paul, John O",
+    "amount": "",
+    "links": []
+  },
+  {
+    "event_number": 29,
+    "date": "2024-07-23",
+    "code": "JUDG",
+    "description": "JUDGMENT Document Available (#1059382584) TIFF PDF",
+    "count": "",
+    "party": "",
+    "amount": "",
+    "links": [
+      {
+        "title": "TIFF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026cn=CS-2023-9684\u0026bc=1059382584\u0026fmt=tif",
+        "oscn_id": "1059382584"
+      },
+      {
+        "title": "PDF",
+        "link": "https://www.oscn.net/dockets/GetDocument.aspx?ct=oklahoma\u0026bc=1059382584\u0026cn=CS-2023-9684\u0026fmt=pdf",
+        "oscn_id": "1059382584"
+      }
+    ]
+  }
+]

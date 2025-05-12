@@ -1,5 +1,4 @@
 module Scrapers
-
   # Some counties aren't available on the daily filings report.
   # This is an alternative system.
   # Should only be used as a backup for smaller counties,

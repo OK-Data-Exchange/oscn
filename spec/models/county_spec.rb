@@ -11,6 +11,7 @@ RSpec.describe County, type: :model do
     it { should have_many(:case_not_founds).dependent(:destroy) }
     it { should have_many(:census_datas).dependent(:destroy) }
     it { should belong_to(:district_attorney).class_name('DistrictAttorney').optional }
+    it { should define_enum_for(:rms).backed_by_column_of_type(:string) }
   end
 
   describe '#name_id_mapping' do

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "ODOM,  JOSHUA  LESLIE",
+    "link": "GetPartyRecord.aspx?db=oklahoma\u0026cn=CM-2022-4183\u0026id=19062534",
+    "party_type": "Defendant"
+  },
+  {
+    "name": "OKLAHOMA COUNTY SHERIFF",
+    "link": "GetPartyRecord.aspx?db=oklahoma\u0026cn=CM-2022-4183\u0026id=15867408",
+    "party_type": "ARRESTING AGENCY"
+  },
+  {
+    "name": "STATE OF OKLAHOMA",
+    "link": "GetPartyRecord.aspx?db=oklahoma\u0026cn=CM-2022-4183\u0026id=32000",
+    "party_type": "Plaintiff"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "date": "2023-03-09T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) - STRICKEN",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2023-05-11T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) 2X",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2023-07-12T05:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) 3X - STRICKEN",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2023-07-26T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) 4X",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2023-09-20T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) 5X",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2023-12-06T15:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR) X 6",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2024-02-14T15:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR)X7",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2024-03-21T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR)X8",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2024-04-24T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR)X9",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2024-06-26T14:00:00.000+00:00",
+    "event_type": "DISPOSITION (MISDEMEANOR)X10 TO PLEA",
+    "event_code": "DIM",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Martha Oakes"
+  },
+  {
+    "date": "2024-07-26T05:00:00.000+00:00",
+    "event_type": "COST ADMINISTRATION REVIEW",
+    "event_code": "CAR",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Cost Admin. Judge (General)"
+  },
+  {
+    "date": "2025-02-07T06:00:00.000+00:00",
+    "event_type": "COST ADMINISTRATION REVIEW",
+    "event_code": "CAR",
+    "party_name": "ODOM,  JOSHUA  LESLIE",
+    "docket": "Cost Admin. Judge (General)"
+  }
+]

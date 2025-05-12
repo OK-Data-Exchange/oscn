@@ -1,3 +1,4 @@
+-- replace crf_number with any case number field
 select CASE
            WHEN (
                (crf_number)::text ~ '^([A-Za-z]{2,3})?-?[0-9]{2,4}-[0-9]{1,8}'::text

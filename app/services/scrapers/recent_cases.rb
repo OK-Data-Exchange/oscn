@@ -7,7 +7,7 @@ module Scrapers
     def initialize(county, days_ago, days_forward)
       @case_changes = OscnScraper::Parsers::CaseChanges
       @county = county
-      @court_cases = CourtCase.pluck(:case_number, :oscn_id).to_h
+      @court_cases = CourtCase.for_county_name(county).pluck(:case_number, :oscn_id).to_h
       @case_types = CaseType.active
       @recent_cases = []
       @days_ago = days_ago

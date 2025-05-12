@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_30_183759) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_09_152534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
@@ -170,6 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_30_183759) do
     t.datetime "updated_at", null: false
     t.bigint "district_attorney_id"
     t.integer "ok_code"
+    t.string "rms", default: "OCIS"
     t.index ["district_attorney_id"], name: "index_counties_on_district_attorney_id"
   end
 
