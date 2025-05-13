@@ -6,7 +6,13 @@ require 'open-uri'
 # (So on 2022-10-31 the data on the site will be from 2022-03 to 2022-06)
 
 namespace :doc do
-  desc 'Scrape DOC for most recent file and import'
+  desc 'Scrape DOC for most recent file to s3 and validate'
+  task :scrape, [:dir] => [:environment] do |_t, args|
+    dir = args.dir
+    Scrapers::Doc::QuarterlyData.perform(dir)
+  end
+
+  desc 'Import DOC from stored s3 files'
   task :import, [:dir] => [:environment] do |_t, args|
     dir = args.dir
     Importers::Doc::OffenseCode.new(dir).perform
