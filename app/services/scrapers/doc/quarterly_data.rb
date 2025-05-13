@@ -20,7 +20,7 @@ module Scrapers
         Zip::InputStream.open(StringIO.new(input)) do |io|
           while (entry = io.get_next_entry)
             content = io.read
-            filename = entry.name.downcase
+            filename = entry.name
             Bucket.new.put_object("doc/#{@dir}/#{filename}", content)
           end
         end
