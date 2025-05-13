@@ -7,6 +7,14 @@ require 'open-uri'
 
 namespace :doc do
   desc 'Scrape DOC for most recent file and import'
+
+  desc 'Scrape DOC for most recent file and validate'
+  task :scrape, [:dir] => [:environment] do |_t, args|
+    dir = args.dir
+    Scrapers::Doc::QuarterlyData.perform(dir)
+  end
+
+  desc 'Scrape DOC for most recent file and import'
   task :import, [:dir] => [:environment] do |_t, args|
     dir = args.dir
     Importers::Doc::OffenseCode.new(dir).perform
