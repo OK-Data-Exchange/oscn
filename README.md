@@ -60,3 +60,13 @@ High Priority Cases - Any case that has appear on the docket in the past 7 days 
 Medium Priority Cases - Any open case (`closed_on` = `nil`). Scrapes the oldest first.
 
 Low Priority Cases - Closed cases that likely will not be updated as often.
+
+## Manual Scraping/Imports
+
+### DOC
+
+1. Find the date to use for the run by downloading the file to your local (see the quarterly_data.rb importer for 
+   location) and looking at the bottom of the file for the maxiumum sentencing date. Use that month for the folder name.
+2. run `rake "doc:scrape['2025-04']"` (replace 2025-04 with the folder name)
+3. if there are any failures in validation you probably need to update the code to address them.
+4. If there are no failtures in validation then run `rake "doc:import['2025-04']"` (replacing 2025-04 again)
