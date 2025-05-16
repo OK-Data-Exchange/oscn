@@ -1,0 +1,3977 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en-US" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en-US" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-US" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        OSCN Case Details
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="/assets/css/normalize.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-2.3.2.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-Bx4pytHkyTDy3aJKjGkGoHPt3tvv6zlwwjc3iqN7ktaiEMLDPqLSZYts2OjKcBx1" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/assets/css/oscn-navigation.css">
+    <link rel="stylesheet" href="/assets/css/oscn-footer.css">
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .docket-first-column {
+            display: inline-block;
+            width: 125px;
+            text-align: center;
+        }
+        .docketlist th:nth-child(2){
+            display: none;
+        }
+        .docketlist td:nth-child(2){
+            display: none;
+        }
+        .docketlist,.docketlist tr {
+            position: relative;
+        }
+        .docketlist th:nth-child(3) {
+            position: absolute;
+            left: 10em;
+        }
+        span.partyname {
+            font-size: 0.75rem;
+        }
+        .docketlist td:nth-child(3) .description-wrapper{
+            margin-top: 1.75em;
+            position: relative;
+            margin-left: -3.5em;
+            padding-right: 1em;
+        }
+        /*------ kellpro remove space on additional text*/
+        .addtl-text .description-wrapper{
+            margin-top: 0!important;
+        }
+        .addtl-text .docket_code {
+            display: none;
+        }
+        .docketlist td:nth-child(1) {
+            font-weight: bold;
+        }
+        .docketlist th:nth-child(4),
+        .docketlist td:nth-child(4){
+            position: absolute;
+            right: 6em;
+        }
+        .docketlist th:nth-child(5),
+        .docketlist td:nth-child(5){
+            position: absolute;
+            right: 10em;
+        }
+        .docketlist th:nth-child(6),
+        .docketlist td:nth-child(6){
+            position: absolute;
+            right: 0;
+        }
+        .docketlist th:nth-child(2),
+        .docketlist td:nth-child(2){
+            display: table-cell;
+            position: absolute;
+            left: 6.1em;
+            font-weight: bold;
+        }
+
+        .docketRow td {
+            border-bottom: none!important;
+            border-top: none!important;
+        }
+        /*
+.docketlist td:nth-child(1),
+.docketlist td:nth-child(3){
+	border-bottom: gray solid 1px!important;
+}
+*/
+        .primary-entry {
+            overflow: hidden;
+        }
+        .primary-entry td {
+            position: relative;
+        }
+        .primary-entry > td:before {
+            content: '';
+            border-top: 1px solid gray;
+            display: block;
+            position: absolute;
+            top: -1px;
+            width: 100%;
+        }
+        .kp.docketlist td:nth-child(1),
+        .kp.docketlist td:nth-child(3){
+        //border-bottom: #cecece solid 1px!important;
+        }
+
+
+
+        @media print {
+            .docketlist thead {
+                display: table-row;
+            }
+            .description-wrapper img { display: none; }
+            thead, thead tr {
+                position: relative!important;
+                width: 100%;
+            }
+        }
+        @media screen and (max-width:768px){
+            .docketlist td:nth-child(2){
+                display: none;
+                font-size: smaller;
+            }
+        }
+        .partyname:after {
+            content:'\f007';
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 900;
+            position: relative;
+            right: -0.25em;
+        }
+        .count_issue:before {
+            content:'\f292';
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 900;
+        }
+        .docket_code:before {
+            content:'[';
+            font-family: "Font Awesome 5 Pro";
+            position: relative;
+            left: -0.25em;
+        }
+        .docket_code:after {
+            content:']';
+            font-family: "Font Awesome 5 Pro";
+            position: relative;
+            right: -0.25em;
+        }
+        .warrant .docket_code:before {
+            content:'[ \f06e';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            font-weight: 900;
+        }
+        .return-warrant .docket_code:before {
+            content:'[ \f0e2';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            font-weight: 900;
+        }
+        .doc-tif:before {
+            content: '\f15b';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            color: black;
+        }
+        .doc-pdf:before {
+            content: '\f1c1';
+            font-family: "Font Awesome 5 Pro";
+            left: -0.25em;
+            color: #FF0000;
+        }
+
+
+        /*COUNTS*/
+        @media screen and (max-width:1024px){
+
+            /*SHORTSTYLE*/
+            .caseStyle td ~ td{
+                width: 33%;
+            }
+            /*END SHORTSTYLE*/
+
+            .Disposition td, .Disposition th, .Counts td {
+                display: block;
+            }
+
+            .dispositionInformation, .paddedContainer, .partyName {
+                display: none!important;
+            }
+
+            .CountsContainer ~ .CountsContainer {
+                border-top: 3px solid silver;
+            }
+
+            .CountDescription {
+                padding-left: 1.75rem;
+            }
+
+            .Disposition th,
+            .Disposition td {
+                padding-left: 14px;
+            }
+
+            .countpartyname:before {
+                content: 'Party Name: ';
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            .countdisposition, .countdisposition {
+                margin-left: 1rem;
+            }
+
+            .Disposition tbody tr ~ tr {
+                display: block;
+                margin-top: 0.5rem;
+                border-top: 1px silver dashed
+            }
+        }
+
+
+        /*EVENTS*/
+        @media screen and (max-width:1024px){
+            .events_table td {
+                display: block;
+            }
+            td.event_partyname.empty, td.event_reporter.empty, td.event_judge.empty {
+                display: none;
+            }
+
+            td.event_partyname:before,
+            td.event_reporter:before,
+            td.event_judge:before {
+                font-weight: 600;
+            }
+            td.event_partyname:before { content: 'Party Name: '; }
+            td.event_reporter:before { content: 'Reporter: '; }
+            td.event_judge:before { content: 'Docket: '; }
+
+            span.nbsps { display: none; }
+
+            .events_table tr ~ tr {
+                border-top: 1px dashed silver;
+                padding: 0.25rem
+            }
+            .events_table tr{
+                padding-left: 0.5rem;
+                display: block;
+            }
+            td.event_partyname,
+            td.event_reporter,
+            td.event_judge
+            {
+                padding-left: 2rem;
+                font-size: 12px
+            }
+
+            .events_table thead {
+                display: none;
+            }
+        }
+    </style>
+    <!-- /STYLESHEET_INLINE/ -->
+    <script src="/assets/js/modernizr-2.6.2.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/assets/js/respond.min.js"></script>
+    <script>
+        window.onload = function() {
+            setTimeout(function(){
+                var height = $(".footer").outerHeight(true);
+                $("#oscn-content").css("padding-bottom", function(){
+                    return height;
+                });}, 2000);
+        }
+    </script>
+    <![endif]-->
+    <script src="/assets/js/cookies.js"></script>
+    <!-- /JAVASCRIPT_TOP/ -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-54280338-1', {'sampleRate': 50});
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <!-- /ERRORMESSAGE/ -->
+    <div class="header" data-elastic-exclude>
+        <div class="accessibility">
+            <a href="#oscn-content">Skip to Main Content</a>
+            <a href="/v4/accessibility/">Accessibility Statement</a>
+        </div>
+        <div class="navigation-tophat">
+            <div class="sized">
+                <div class="left">
+                    <ul>
+                        <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=">Help</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <ul>
+                        <!--<li><a href="">e-filing</a></li>-->
+                        <li><a href="https://pay.oscn.net/epayments/">e-payments</a></li>
+                        <li><a href="/jobs/">Careers</a></li>
+                        <!-- <li class="site-search no-border">
+								<form class="search-form" method="get" action="/search/search.aspx">
+									<div class="search-container">
+									<select class="template-dropdown" style="display: none;">
+										<option class="template-option"></option>
+									</select>
+									<select class="search-dropdown" name="t">
+										<optgroup label="Legal Research">
+											<option value="citation">By Citation (QuickCite)</option>
+											<option value="judge">By Judge</option>
+											<option value="caselaw">Case Law (full-text)</option>
+											<option value="statutes">Statutes &amp; Rules (full-text)</option>
+											<option value="library">All Oklahoma Materials (full-text)</option>
+										</optgroup>
+										<optgroup label="Court Records">
+											<option selected="selected" value="party">By Party Name</option>
+											<option value="business">By Business Name</option>
+											<option value="casenumber">By Case Number</option>
+											<option value="traffic">By Traffic Citation</option>
+										</optgroup>
+									</select></div><!--
+									<input class="search-input" type="text" value="Search" name="q"></input><!--
+									<button class="search-button" type="submit" value="Go!"></button>
+								</form>
+							</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-spectacles sized">
+            <div class="navigation-utility">
+                <div class="brand"><a href="/"><img id="logo" class="screen-logo" alt="OSCN" src="/assets/img/logo.jpg" /><img class="print-logo" alt="" src="/assets/img/logo-bw.jpg" /></a></div>
+                <div class="toggle" style="display: none;"><button type="button" data-toggle="navigation"><span class="sr-only">toggle navigation</span></button></div>
+            </div>
+            <nav>
+                <ol class="nav-menu">
+                    <li class="nav-item" id="home"><a href="/v4/">Home</a></li>
+                    <li class="nav-item" id="courts_menu"><a href="/courts/">Courts</a></li>
+                    <li class="nav-item" id="decisions"><a href="/decisions/">Decisions</a></li>
+                    <li class="nav-item" id="programs"><a href="/v4/programs/">Programs</a></li>
+                    <li class="nav-item" id="news"><a href="/news/">News</a></li>
+                    <li class="nav-item" id="legal-research"><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=LIBRARY">Legal Research</a></li>
+                    <li class="nav-item" id="court-records"><a href="/dockets/">Court Records</a></li>
+                    <li class="nav-item" id="quick-links"><a href="/v4/quicklinks/">Quick Links</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div id="oscn-content"><div class="sized">
+        <style>
+            td, th { padding: 2px 5px; }
+            h2.styletop {
+                text-align: left;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            span.styletop {
+                display: block;
+                text-align: center;
+                line-height: 1.5rem;
+                padding: 0.5rem 0;
+            }
+
+            .section {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: left;
+            }
+
+            .partyCounts thead th { text-decoration: underline; }
+            .paddedContainer { width: 75px; }
+            .partyName, .dispositionInformation, .CountDescription { padding: 2px 5px; }
+            .CountNumber { width: 75px; }
+            .CountNumber, .partyName, .dispositionInformation, .CountDescription { vertical-align: top; }
+
+            p { margin: 0; padding: 0; }
+            table th { text-align: left; }
+            table { margin-bottom: 10px; width: 100%; border-collapse: collapse; }
+
+            .caseStyle {  }
+            .caseStyle td { border: 1px solid #e1e1e1; padding: 5px 10px; }
+
+            .docketRow td { padding: 3px 2px 3px 2px; border-top: thin solid #e1e1e1; border-bottom: thin solid #e1e1e1;}
+
+            .evenRow { background-color: #f7f7f7;}
+            .oddRow { background-color: white; }
+
+            .multipleRecords {
+                width: 100%;
+                position: relative;
+                margin-top: 2em;
+                margin-bottom: 2em;
+            }
+            .multipleRecords caption {
+                text-align: left;
+                font-weight: bold;
+                position: relative;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                position: relative;
+            }
+            .foundRecords {
+                position: absolute;
+                right: 5px; font-size: 14px;
+            }
+            .multipleRecords thead th {
+                font-size: 13px;
+                text-align: left;
+                padding: 4px 3px;
+                vertical-align: top;
+                background-color: #f7f7f7;
+            }
+            .tablerow { border-top: thin solid #e1e1e1; }
+            .tablerow td { font-size: 11px; padding: 4px 3px; color: #033c60; vertical-align: top;}
+
+
+            #rev, .revLabel { display: inline; margin: 0; }
+
+            .heading3 {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: center;
+                margin-top: 2em;
+            }
+
+            table { margin: 0 auto 0 auto; }
+            .casetype { width: 50%; }
+            .casetype caption {
+                text-align: center;
+                color: #033c60;
+                margin: 0;
+                padding: 10px 5px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            .casetype th {
+                font-size: 13px;
+                text-align: left;
+                padding: 4px 3px;
+                vertical-align: top;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+            }
+            .casetype tr {
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+            }
+            .casetype td { padding: 3px 4px; }
+            .casenoformat { width: 350px; }
+            .casenoformat tbody tr td { text-align: center; }
+            table caption { }
+            .casetype { min-width: 250px; }
+            form label { font: bold 11pt arial; }
+            .padding { height: 2em; }
+        </style>
+        <style>
+            td, th {
+                padding: 2px 5px;
+            }
+            h2.styletop {
+                text-align: left;
+                background: #033c60;
+                color: white;
+                margin: 0;
+                padding: 6px;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            span.styletop { display: block; text-align: center; }
+
+            .section {
+                text-transform: uppercase;
+                color: #033c60;
+                padding: 2px 5px;
+                background-color: #f7f7f7;
+                border-top: 1px #e1e1e1 solid;
+                border-bottom: 1px #e1e1e1 solid;
+                font-size: 22px;
+                text-align: left;
+            }
+
+            .partyCounts thead th {
+                text-decoration: underline;
+            }
+            .paddedContainer {
+                width: 75px;
+            }
+            .partyName, .dispositionInformation, .CountDescription {
+                padding: 2px 5px;
+            }
+            .CountNumber {
+                width: 75px;
+            }
+
+            .CountNumber, .partyName, .dispositionInformation, .CountDescription {
+                vertical-align: top;
+            }
+
+            p { margin: 0; padding: 0; }
+            table th { text-align: left; }
+            table { margin-bottom: 10px; width: 100%; border-collapse: collapse; }
+
+            .caseStyle {  }
+            .caseStyle td { border: 1px solid #e1e1e1; padding: 5px 10px; }
+
+            .docketRow td { padding: 3px 2px 3px 2px; border-top: thin solid #e1e1e1; border-bottom: thin solid #e1e1e1;}
+
+            .evenRow { background-color: #f7f7f7;}
+            .oddRow { background-color: white; }
+        </style>
+        <p class="notice">The information on this page is NOT an official
+            record. Do not rely on the correctness or completeness of this
+            information. Verify all information with the <a href="
+    /courts/wagoner">official record
+                keeper</a>. The information contained in this report is provided in
+            compliance with the Oklahoma Open Records Act,
+            <a href="http://www.oscn.net/applications/oscn/deliverdocument.asp?citeid=80288">51 O.S. 24A.1</a>.
+            Use of this information is governed by this act, as well as other
+            applicable state and federal laws.
+        </p>
+        <h2 class="styletop"><span class="styletop">In the District Court in and for <a style="color: white; text-decoration: underline;" href="
+    /courts/wagoner">wagoner&nbsp;County</a>, Oklahoma</span></h2>
+        <table class="caseStyle" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td valign="center" width="50%">STATE OF OKLAHOMA VS. KILE, MELISSA MAE</td>
+                <td width="50%"><strong>
+                    No. CF-2022-00029<br>
+                    (Criminal Felony)
+                </strong><br><br>
+                    Filed: 01/25/2022<br><br><br>Judge: KIRKLEY, DOUGLAS<br></td>
+            </tr>
+        </table><script id="json_style" type="application/json">
+        {
+            "style": "STATE OF OKLAHOMA VS. KILE, MELISSA MAE",
+            "cmid": "5516314",
+            "cms": "kp",
+            "court": "Wagoner"
+        }
+    </script><h2 class="section party">Parties</h2>
+        <p><a href="GetPartyRecord.aspx?db=wagoner&cn=CF-2022-00029&id=6205953">KILE,&nbsp;MELISSA&nbsp;MAE</a>,
+
+            Defendant<br><a href="GetPartyRecord.aspx?db=wagoner&cn=CF-2022-00029&id=6445803">BENNETT,&nbsp;JOHN</a>,
+
+            DISTRICT ATTORNEY<br> &nbsp;
+        </p>
+        <h2 class="section attorneys">Attorneys</h2>
+        <p>&nbsp;&nbsp;None<br></p>
+        <h2 class="section events">Events</h2><script id="json_events" type="application/json">
+        {
+            "events": [
+
+                {
+                    "date": "Thursday, January 20, 2022 at 10:30:00.000 CST",
+                    "description":
+                    "ARRAIGNMENT DOCKET"
+                },
+                {
+                    "date": "Thursday, January 27, 2022 at 10:30:00.000 CST",
+                    "description":
+                    "ARRAIGNMENT DOCKET"
+                },
+                {
+                    "date": "Thursday, February 3, 2022 at 10:30:00.000 CST",
+                    "description":
+                    "ARRAIGNMENT DOCKET"
+                },
+                {
+                    "date": "Thursday, February 10, 2022 at 10:30:00.000 CST",
+                    "description":
+                    "ARRAIGNMENT DOCKET"
+                },
+                {
+                    "date": "Wednesday, April 6, 2022 at 10:00:00.000 CDT",
+                    "description":
+                    "CRIMINAL DOCKET SMITH"
+                },
+                {
+                    "date": "Wednesday, April 27, 2022 at 08:00:00.000 CDT",
+                    "description":
+                    "CRIMINAL DOCKET SMITH"
+                },
+                {
+                    "date": "Wednesday, June 22, 2022 at 09:00:00.000 CDT",
+                    "description":
+                    "CRIMINAL DOCKET SMITH"
+                },
+                {
+                    "date": "Wednesday, August 10, 2022 at 09:00:00.000 CDT",
+                    "description":
+                    "CRIMINAL DOCKET SMITH"
+                },
+                {
+                    "date": "Wednesday, September 21, 2022 at 09:00:00.000 CDT",
+                    "description":
+                    "CRIMINAL DOCKET SMITH"
+                },
+                {
+                    "date": "Monday, November 14, 2022 at 13:30:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DCA"
+                },
+                {
+                    "date": "Monday, December 19, 2022 at 13:30:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DCA"
+                },
+                {
+                    "date": "Monday, April 3, 2023 at 14:00:00.000 CDT",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, June 5, 2023 at 14:00:00.000 CDT",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, June 26, 2023 at 14:00:00.000 CDT",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, August 21, 2023 at 14:00:00.000 CDT",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, October 2, 2023 at 14:00:00.000 CDT",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, November 13, 2023 at 14:00:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, January 8, 2024 at 14:00:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Tuesday, January 30, 2024 at 13:30:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY"
+                },
+                {
+                    "date": "Monday, February 5, 2024 at 14:00:00.000 CST",
+                    "description":
+                    "FELONY DOCKET KIRKLEY - DISP"
+                },
+                {
+                    "date": "Monday, February 5, 2024",
+                    "description":
+                    "J&S"
+                },
+                {
+                    "date": "Tuesday, February 6, 2024",
+                    "description":
+
+                    " GUILTY PLEA"
+
+                },
+                {
+                    "date": "Monday, February 5, 2024",
+                    "description":
+                    "CONVICTION REPORT TO ELECTION BOARD"
+                },
+                {
+                    "date": "Tuesday, May 7, 2024",
+                    "description":
+                    "TAX INTERCEPT ADD"
+                }
+            ]}
+    </script><table class="events_table" width="100%">
+        <thead>
+        <tr>
+            <th>Event</th>
+            <th>Party</th>
+            <th>Docket</th>
+            <th>Reporter</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="event_description">
+                <font color="green">Thursday, January 20, 2022 at 10:30:00.000 CST</font><br><span class='nbsps'>   </span>ARRAIGNMENT DOCKET<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Thursday, January 27, 2022 at 10:30:00.000 CST</font><br><span class='nbsps'>   </span>ARRAIGNMENT DOCKET<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Thursday, February 3, 2022 at 10:30:00.000 CST</font><br><span class='nbsps'>   </span>ARRAIGNMENT DOCKET<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Thursday, February 10, 2022 at 10:30:00.000 CST</font><br><span class='nbsps'>   </span>ARRAIGNMENT DOCKET<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Wednesday, April 6, 2022 at 10:00:00.000 CDT</font><br><span class='nbsps'>   </span>CRIMINAL DOCKET SMITH<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Wednesday, April 27, 2022 at 08:00:00.000 CDT</font><br><span class='nbsps'>   </span>CRIMINAL DOCKET SMITH<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Wednesday, June 22, 2022 at 09:00:00.000 CDT</font><br><span class='nbsps'>   </span>CRIMINAL DOCKET SMITH<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Wednesday, August 10, 2022 at 09:00:00.000 CDT</font><br><span class='nbsps'>   </span>CRIMINAL DOCKET SMITH<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Wednesday, September 21, 2022 at 09:00:00.000 CDT</font><br><span class='nbsps'>   </span>CRIMINAL DOCKET SMITH<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, November 14, 2022 at 13:30:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DCA<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, December 19, 2022 at 13:30:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DCA<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, April 3, 2023 at 14:00:00.000 CDT</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, June 5, 2023 at 14:00:00.000 CDT</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, June 26, 2023 at 14:00:00.000 CDT</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, August 21, 2023 at 14:00:00.000 CDT</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, October 2, 2023 at 14:00:00.000 CDT</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, November 13, 2023 at 14:00:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, January 8, 2024 at 14:00:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Tuesday, January 30, 2024 at 13:30:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, February 5, 2024 at 14:00:00.000 CST</font><br><span class='nbsps'>   </span>FELONY DOCKET KIRKLEY - DISP<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, February 5, 2024</font><br><span class='nbsps'>   </span>J&S<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Tuesday, February 6, 2024</font><br><span class='nbsps'>   </span> GUILTY PLEA<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Monday, February 5, 2024</font><br><span class='nbsps'>   </span>CONVICTION REPORT TO ELECTION BOARD<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        <tr>
+            <td class="event_description">
+                <font color="green">Tuesday, May 7, 2024</font><br><span class='nbsps'>   </span>TAX INTERCEPT ADD<!--
+                          (None)
+                        --></td>
+            <td class="event_partyname empty">
+            </td>
+            <td class="event_judge empty">
+            </td>
+            <td class="event_reporter empty">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        <h2 class="section counts">Counts</h2>
+        <p>
+            &nbsp;&nbsp;<strong>1.</strong>&nbsp;
+            DUI (FELONY)</p>
+        <p>
+            &nbsp;&nbsp;<strong>2.</strong>&nbsp;
+            TRANSPORTING OPEN CONTAINER OF INTOXICATING BEVERAGE</p>
+        <p>
+            &nbsp;&nbsp;<strong>3.</strong>&nbsp;
+            VIOLATION OF DL RESTRICTIONS</p><br><h2 class="section dockets">Docket</h2>
+        <table class="docketlist kp" cellpadding="2" cellspacing="2" border="0">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Count</th>
+                <th>Party</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/20/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">PROBABLE CAUSE AFFIDAVIT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/21/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">APPEARANCE BOND</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ENTER BONDSMANS NAME: ROBERT COOPER</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 25.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ENTER BONDING COMPANY: MERRILL BONDING CO</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 2.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ENTER BOND AMOUNT: $5000</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.75</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ENTER POWER NUMBER: 46409</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/24/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">INSTRUCTIONS FOR PERSONS RELEASED ON BAIL (OR RELEASED</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1034324498)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1034324498&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1034324498&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ON O.R.)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/25/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CT I: DUI (FELONY) ($839)</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1034327722)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1034327722&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1034327722&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 333.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 6.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 5.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEPT OF PUBLIC SAFETY REV FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 155.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">STATE TREASURERS FORENSIC FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF FO10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AFS1</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF DPS REV FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 15.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CL10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">MEDICAL LIABILITY FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF MLRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DA REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 50.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF DARF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 5.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">TRAUMA CARE REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 100.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF TCRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">OKLAHOMA COURT INFORMATION SYSTEM FEE - EFFECTIVE 07/01/04</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 25.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">SHERIFF SERVICE FEE-COURTHOUSE SECURITY SUB ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF COURTHOUSE SECURITY FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ATTORNEY GENERAL VICTIM SERVICES UNIT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AG VICTIM SERVICES FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CHILD ABUSE MULTIDISCIPLINARY ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CAMA FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">15% TO DISTRICT COURT REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 54.15</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DPS IMPAIRED DRIVER DATABASE FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 15.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% TO COURT CLERK REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">15% TO DISTRICT COURT REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 2.25</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ADDITIONAL RV FOR AFIS (NOV, 2017)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.50</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/25/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CT II: TOC-BEER TITLE 21 SECTION 1220A  ($364)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 83.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 6.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 5.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AF10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CL10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF FO10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">OKLAHOMA COURT INFORMATION SYSTEM FEE - EFFECTIVE 07/01/04</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 25.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">MEDICAL EXPENSE LIABILITY RF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF MLRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">TRAUMA CARE RF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 100.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF TCRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">TRAUMA CARE RF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF TCRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">SHERIFF SERVICE FEE-COURTHOUSE SECURITY SUB ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF COURTHOUSE SECURITY FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ATTORNEY GENERAL VICTIM SERVICES UNIT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AG VICTIM SERVICES FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CHILD ABUSE MULTIDISCIPLINARY ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CAMA FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DISTRICT ATTORNEY REVOLVING FUND TITLE 21 MISD</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 30.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% DACM</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">15% TO DISTRICT COURT REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 29.40</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/25/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CT III: VIOLATION OF DL RESTRICTIONS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 88.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">MULTI CT (TITLE 47) ($244)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 5.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 6.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 20.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">(Entry with fee only)</div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AF10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CLTX</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF FO10</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF DPSR</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 2.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">TRAUMA CARE REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF TCRF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">OKLAHOMA COURT INFORMATION SYSTEM FEE - EFFECTIVE 07/01/04</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 25.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ATTORNEY GENERAL VICTIM SERVICES UNIT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF AG VICTIM SERVICES FEE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DA REVOLVING FUND FOR TIT 47 TRAFFIC COUNTY</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 20.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF DACT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 2.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CHILD ABUSE MULTIDISCIPLINARY ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 3.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CAMA</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 0.30</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">SHERIFF SERVICE FEE-COURTHOUSE SUB ACCOUNT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10% OF CHS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 1.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">15% TO DISTRICT COURT REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 14.40</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/27/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 1-27-22 SHOOK - STATE P BY JIMMY DUNN; DEF CALLED,</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">PASSED TO 2-3-22 @ 10:30AM; BWUA</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/07/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 2-3-22 SHOOK - COURTHOUSE CLOSED FOR INCLEMENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">WEATHER; CASE HAD BEEN BEEN PASSED TO 2-10-22 @</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">10:30AM, DEF WAS NOTIFIED OF NEW DATE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/10/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 2-10-22 SHOOK - STATE P BY JOHN BENNETT; DEF PRESENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">W/O COUNSEL; DEF UNEMPLOYED, COMPLETED PAUPER'S</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">AFFIDAVIT, OIDS ATTY LAUREN BLAKE APPT'D; PLEA OF NOT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">GUILTY ENTERED, SET FOR PH 4-6-22 @ 10:00AM; DRB</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/10/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">PAUPERS AFFIDAVIT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 40.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/10/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ORDER APPOINTING INDIGENT COUNSEL - L BLAKE</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1034328307)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1034328307&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1034328307&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>04/07/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 4-6-22 SMITH - STATE P BY JOHN BENNETT; DEF PRESENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">W/ ATTY LAUREN BLAKE; PBA TO 4-27-22 @ 8AM; NO ISSUE;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DRB</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>04/28/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 4-27-22 SHOOK - STATE P BY JOHN BENNETT; DEF PRESENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">W/ ATTY LAUREN BLAKE; PBA TO 6-22-22 @ 9:00AM, NO ISSUE</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>06/23/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 6-22-22 KING - STATE P BY HALEY ROBINSON; DEF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">PRESENT W/ ATTY LAUREN BLAKE; PBA TO 8-10-22 @ 9:00AM,</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">NO ISSUE; DRB</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>08/10/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">D/S OF 8-10-22 (SHOOK) STATE PRESENT BY HALEY ROBINSON;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEFENDANT APPEARED W/ ATTY LAUREN BLAKE; CASE PASSED TO</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">9-21-22 @ 9:00 A.M.</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>09/22/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 9-21-22 SHOOK - STATE P BY JOHN BENNETT; DEF PRESENT</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">W/ ATTY LAUREN BLAKE; PH WAIVED, SET FOR DCA 11-14-22 @</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">1:30 BEFORE THE HONORABLE DOUGLAS KIRKLEY; DEF WAIVES</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">30 DAYS FOR DCA; DRB</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>09/22/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">WAIVER OF PRELIMINARY HEARING</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1034272903)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1034272903&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1034272903&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>11/15/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 11-14-22 DCA DKT KIRKLEY; ST P BY HALEY ROBINSON;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEF P W/COUNSEL LAUREN BLAKE; DCA PASSED TO 12-19-22</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">@1:30; DEF WAIVES 30 DAYS</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>12/20/2022&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 12-19-22 DCA DKT KIRKLEY; ST P BY HALEY ROBINSON;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEF P W/COUNSEL LAUREN BLAKE; (MEDICAL PROCEDURE) DCA</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">CONDUCTED; DPNG; WAIVES READING; DISP 4-3-23 @2:00</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>04/04/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 4-3-23 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON; DEF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">P W/COUNSEL LAUREN BLAKE; RESET AT DEF'S REQUEST TO</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">NEGOTIATE TO 6-5-23 @2:00</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>06/06/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 6-5-23 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEF P W/COUNSEL LAUREN BLAKE; PASSED FOR PLEA 6-26-23</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">@2:00</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>06/27/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 6-26-23 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON;</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DEF P W/COUNSEL LAUREN BLAKE; BLIND PLEA SET 8-21-23</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">@2:00</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>08/22/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 8-21-23 DISP DKT KIRKLEY; ST P BY JOHN BENNETT; DEF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">P W/COUNSEL LAUREN BLAKE; BLIND PLEA ENTERED; PSI</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ORDERED; SENTENCING SET 10-2-23 @2:00</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>08/22/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">ORDER TO CONDUCT PRESENTENCE INVESTIGATION</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1034190328)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1034190328&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1034190328&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>09/27/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">PRE-SENTENCE INVESTIGATION</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">Document Available at Court Clerk's Office</span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>10/03/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 10-2-23 DISP DKT KIRKLEY; ST P BY JOHN BENNETT; DEF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">P; ATTY LAUREN BLAKE PHONED IN WITH ILL CHILD; PASS TO</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">11-13-23 @2:00; CONTACTING WITNESSES</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>11/14/2023&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 11-13-23 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON; DEF P W/COUNSEL LAUREN BLAKE; RESET SENTENCING ON 1-8-24 @2:00; FINISHING TREATMENT (MEDICAL)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/08/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 1-8-24 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON; ATTY LAUREN BLAKE APPEARS FOR DEF; PASS OVER STATE'S OBJECTION TO 1-30-24 @1:30; BWUA</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>01/30/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 1-30-24 FEL DKT KIRKLEY; ST P BY HALEY ROBINSON; DEF P W/COUNSEL LAUREN BLAKE; SENTENCING PASSED TO 2-5-24 @2:00; (AMBER SANDERS REPORTING)</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/05/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">DS 2-5-24 DISP DKT KIRKLEY; ST P BY HALEY ROBINSON; DEF P W/COUNSEL LAUREN BLAKE; WITNESSES CALLED PRIOR TO SENTENCING; BLIND PLEA PREVIOUSLY ENTERED; SENTENCING RENDERED ON PLEA & SUMMARY; DEF TO REPORT WCJ FEB 9, 2024 @9:00; SEE M/O</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/06/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">SENT ORDER</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1055709296)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1055709296&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1055709296&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 300.00</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/08/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">INCARCERATION FEES $92.50</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">FIGURE 10% FEES FOR RV</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 7.40</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">FIGURE 10% FEES FOR DA</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 7.40</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">FIGURE 15% FEES FOR DISTRICT COURT REVOLVING FUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 11.10</font>
+                </td>
+            </tr>
+            <tr class="docketRow oddRow addtl-text">
+                <td valign="top">
+                    <font color="000000"><nobr>&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">FIGURE 90% FEES FOR SHERIFF</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 66.60</font>
+                </td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/06/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">POG</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1055709264)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1055709264&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1055709264&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/06/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">J&S 02/05/2024</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1055706213)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1055706213&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1055706213&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow evenRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>02/20/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">JAIL TIME STATEMENT</font>
+                        </p>
+                        <p><span style="text-decoration: italic;">
+									Document Available (#1060502907)
+									<nobr><a class="doc-tif" href="GetDocument.aspx?ct=wagoner&cn=CF-2022-00029&bc=1060502907&fmt=tif" target="_blank" title="Download document in TIFF format.">TIFF</a></nobr>
+									&nbsp;&nbsp;
+									<nobr><a class="doc-pdf" href="GetDocument.aspx?ct=wagoner&bc=1060502907&cn=CF-2022-00029&fmt=pdf" target="_blank" title="Download document in PDF format.">PDF</a></nobr></span></p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right"></td>
+            </tr>
+            <tr class="docketRow oddRow primary-entry">
+                <td valign="top">
+                    <font color="000000"><nobr>05/07/2024&nbsp;</nobr></font>
+                </td>
+                <td valign="top">
+                    <font class="docket_code" color="000000"><nobr>TEXT</nobr></font>
+                </td>
+                <td valign="top">
+                    <div class="description-wrapper">
+                        <p>
+                            <font color="000000">TAX INTERCEPT NOTICE SENT TO OTC TO ATTACH REFUND</font>
+                        </p>
+                    </div>
+                </td>
+                <td align="center" valign="top"></td>
+                <td valign="top"></td>
+                <td valign="top" align="right">
+                    <font color="green">$ 10.00</font>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div></div>
+    <div class="footer" data-elastic-exclude>
+        <div class="container-fluid sized">
+            <div class="row-fluid">
+                <div class="contact-foot column span3">
+                    <h6>oscn</h6>
+                    <p>
+                        EMAIL: <a href="mailto:webmaster@oscn.net">webmaster@oscn.net</a><br />
+                        Oklahoma Judicial Center<br />
+                        2100 N Lincoln Blvd.<br />
+                        Oklahoma City, OK 73105</p>
+                </div>
+                <div class="courts-foot column span3">
+                    <h6>courts</h6>
+                    <ul class="footer-list">
+                        <li><a href="http://www.oscn.net/oscn/schome/">Supreme Court of Oklahoma</a></li>
+                        <li><a href="http://www.okcca.net/">Court of Criminal Appeals</a></li>
+                        <li>Court of Civil Appeals</li>
+                        <li><a href="http://www.oscn.net/applications/oscn/start.asp?viewType=COURTS">District Courts</a></li>
+                    </ul>
+                </div>
+                <div class="decisions-foot column span3">
+                    <h6>decisions</h6>
+                    <ul class="footer-list">
+                        <li><a href="/decisions/">New Decisions</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSSC">Supreme Court of Oklahoma</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCR">Court of Criminal Appeals</a></li>
+                        <li><a href="http://www.oscn.net/applications/oscn/Index.asp?ftdb=STOKCSCV">Court of Civil Appeals</a></li>
+                    </ul>
+                </div>
+                <div class="programs-foot column span3">
+                    <h6>programs</h6>
+                    <ul class="footer-list">
+                        <li><a href="http://www.thesovereigntysymposium.com/">The Sovereignty Symposium</a></li>
+                        <!--<li><a href="#">Access to Justice</a></li>-->
+                        <li><a href="http://www.oscn.net/static/adr/default.aspx">Alternative Dispute Resolution</a></li>
+                        <li><a href="http://www.oscn.net/static/adr/default.aspx">Early Settlement Mediation</a></li>
+                        <li><a href="http://www.oscn.net/Sites/CourtImprovement/default.aspx">Children's Court Improvement Program (CIP)</a></li>
+                        <li><a href="/jnc/">Judicial Nominating Commission</a></li>
+                        <li><a href="http://www.oscn.net/static/forms/aoc_forms/interpreter.asp">Certified Courtroom Interpreters</a></li>
+                        <li><a href="http://www.oscn.net/static/forms/aoc_forms/csr.asp">Certified Shorthand Reporters</a></li>
+                        <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shoes">
+            <div class="sized">
+                <ul>
+                    <!--<li><a href="#">site map</a></li>
+				<li><a href="#">information</a></li>
+				-->
+                    <li><a href="http://www.oscn.net/applications/oscn/SimpleHelp.asp?HelpContextID=84">Contact Us</a></li>
+                    <li><a href="/jobs/">Careers</a></li>
+                    <li><a href="/pages/accessibility">Accessibility ADA</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery-1.11.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/adobe.aria.menu.min.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/oscn.js"></script>
+<script src="/assets/js/table.sort.filter.js"></script>
+<script>
+  if (window.NodeList && !NodeList.prototype.forEach) { NodeList.prototype.forEach = Array.prototype.forEach; }
+
+  var d = new Date()
+  var cb = d.getFullYear().toString() + (d.getMonth()+1).toString() + ("0" + d.getDate()).slice(-2) + d.getHours()
+
+  var anchors = document.querySelectorAll("a[href$='.pdf']")
+  anchors.forEach(function(a){
+    a.href = a.href.split('?')[0] + "?d=" + cb;
+  });
+
+</script>
+<script src="/dockets/scripts/dockets.js"></script>
+<!--[if IE 7]>
+<script>
+    var height = $(".home-banner").height();
+    $("#bg").height(height);
+</script>
+<![endif]-->
+</body>
+</html>
