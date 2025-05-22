@@ -60,3 +60,18 @@ High Priority Cases - Any case that has appear on the docket in the past 7 days 
 Medium Priority Cases - Any open case (`closed_on` = `nil`). Scrapes the oldest first.
 
 Low Priority Cases - Closed cases that likely will not be updated as often.
+
+## Manual Scraping/Imports
+
+### DOC
+
+1. Find the date to use for the run by downloading the file to your local (see the quarterly_data.rb importer for 
+   location) and looking at the bottom of the sentence extract file for the maxiumum sentencing date. It will be in the 
+   format 20250402 and may run into the case number (e.g, 20250402CF-2021-4596). Use that year and month for the folder name.
+2. run `rake "doc:scrape['2025-04']"` (replace 2025-04 with the year and month from the last step for the folder name)
+3. if there are any failures in validation update the code to address them.
+4. If there are no failures run the import command. 
+   For best results run this in detached mode on a scaled heroku dyno, e.g., 
+   `heroku run:detached -a oscn --size=performance-l rake "doc:import['2025-04']"` (replacing 2025-04 again).
+   Use the code provided to tail the logs for monitoring.
+4. Run `rake "doc:link"` to link the imported data to other counties.
