@@ -1,0 +1,24 @@
+<div class="<%= defined?(heading_class) ?  heading_class : "label" %>">
+  <%= l booking.booking_arrested_at %> -
+  <% if booking.booking_released_at %>
+    <%= l booking.booking_released_at %>
+  <% else %>
+    current
+  <% end %>
+  :
+  <%= booking.booking_facility.downcase.titleize %>
+</div>
+<%= booking.booking_more_info %>
+<br/>
+Offenses:
+<ul>
+  <% booking.booking_offenses.each do |offense| %>
+    <li><%= offense.offense_description.downcase %>
+      <% if offense.clean_case_number %>
+        <a href="<%= offense.case_link %>">
+          - <%= offense.clean_case_number %>
+        </a>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

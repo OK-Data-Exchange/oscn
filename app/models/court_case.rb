@@ -14,6 +14,7 @@ class CourtCase < ApplicationRecord
   has_many :issue_parties, through: :issues
   has_many :links, through: :docket_events
   has_one :report_eviction
+  has_many :roster_cases, class_name: 'Roster::Case'
   has_one :case_html, dependent: :destroy
   has_one :case_stat
 
@@ -55,7 +56,16 @@ class CourtCase < ApplicationRecord
     parties.defendant
   end
 
+  # todo: see if we can merge link methods
   def oscn_link
     "https://www.oscn.net/dockets/GetCaseInformation.aspx?db=#{county.name}&number=#{case_number}"
+  end
+
+  def case_link
+    self.class.link(case_number, oscn_id, county.name)
+  end
+
+  def self.link(case_number, oscn_id, county = 'tulsa')
+    "https://www.oscn.net/dockets/GetCaseInformation.aspx?db=#{county}&number=#{case_number}&cmid=#{oscn_id}"
   end
 end
