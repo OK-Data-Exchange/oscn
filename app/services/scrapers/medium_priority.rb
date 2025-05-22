@@ -5,7 +5,7 @@ module Scrapers
 
     def initialize(days_ago: 14, limit: medium_count)
       @days_ago = days_ago
-      @cases = CourtCase.active.older_than(14.days.ago).limit(limit)
+      @cases = CourtCase.ocis.active.older_than(14.days.ago).limit(limit)
     end
 
     def self.perform(days_ago: 14)

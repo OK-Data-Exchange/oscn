@@ -4,7 +4,7 @@ module Scrapers
   # Should only be used as a backup for smaller counties,
   # as it is limited to retrieving up to 500 per day currently.
 
-  class DailyFilingsAltCounties
+  class NewCasesKpCounties
     attr_accessor :date, :county, :case_number, :case_types, :enqueue
 
     def initialize(county_name, date, enqueue: true)
